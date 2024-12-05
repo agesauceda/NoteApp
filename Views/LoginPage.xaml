@@ -25,7 +25,7 @@
                 <Frame.Shadow>
                     <Shadow Brush="Black" Opacity="0.5" Radius="10" Offset="5,5"/>
                 </Frame.Shadow>
-                <Entry Margin="20,0,0,0" VerticalOptions="Center" Placeholder="Username" Keyboard="Email" />
+                <Entry x:Name="txtUsername" Margin="20,0,0,0" VerticalOptions="Center" Placeholder="Username" Keyboard="Email" />
             </Frame>
         </StackLayout>
 
@@ -40,16 +40,27 @@
                 <Frame.Shadow>
                     <Shadow Brush="Black" Opacity="0.5" Radius="10" Offset="5,5"/>
                 </Frame.Shadow>
-                <Entry Margin="20,0,0,0" VerticalOptions="Center" Placeholder="Password" IsPassword="True" />
+                <Entry x:Name="txtPassword" Margin="20,0,0,0" VerticalOptions="Center" Placeholder="Password" IsPassword="True" />
             </Frame>
         </StackLayout>
 
-        <Button Text="Login" WidthRequest="150" CornerRadius="20" HorizontalOptions="Center" BackgroundColor="#0792ef" />
+        <Button Text="Login" WidthRequest="150" CornerRadius="20" HorizontalOptions="Center" BackgroundColor="#0792ef" Clicked="LoginButton_Clicked" />
 
         <StackLayout Orientation="Horizontal" Spacing="5" HorizontalOptions="Center">
-            <Label Text="Registrarse" TextColor="#50b3f2" />
-            <Label Text="|" TextColor="#50b3f2" />
-            <Label Text="¿Olvidaste tu contraseña?" TextColor="#50b3f2" />
+            <Label>
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Registrarse" TextColor="#50b3f2">
+                            <Span.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding RegisterView}"/>
+                            </Span.GestureRecognizers>
+                        </Span>
+                        <Span Text=" | " TextColor="#50b3f2"/>
+                        <Span Text="¿Olvidaste tu contraseña?" TextColor="#50b3f2"></Span>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
         </StackLayout>
     </VerticalStackLayout>
 </ContentPage>

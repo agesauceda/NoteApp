@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NoteApp.LoginPage"
+             Shell.NavBarIsVisible="False"
+             Title="LoginPage">
+    <VerticalStackLayout Spacing="25" Padding="30,0" VerticalOptions="Center">
+        
+        <Image Source="dotnet_bot.png" HeightRequest="150" WidthRequest="150"/>
+
+        <VerticalStackLayout Spacing="5">
+            <Label Text="¡Bienvenido!" FontSize="28" TextColor="Gray" HorizontalTextAlignment="Center" />
+            <Label Text="Iniciar Sesión" FontSize="18" TextColor="Gray" HorizontalTextAlignment="Center" />
+        </VerticalStackLayout>
+
+        <StackLayout Orientation="Horizontal">
+            
+            <Frame ZIndex="1" HasShadow="True" BorderColor="White" HeightRequest="56" WidthRequest="56" CornerRadius="28">
+                <Frame.Shadow>
+                    <Shadow Brush="Black" Opacity="0.5" Radius="10" Offset="5,5"/>
+                </Frame.Shadow>
+                <Image Source="user.png" HeightRequest="20" WidthRequest="20" />
+            </Frame>
+            <Frame HeightRequest="45" Margin="-20,0,0,0" Padding="0" HasShadow="True" BorderColor="White"  HorizontalOptions="FillAndExpand">
+                <Frame.Shadow>
+                    <Shadow Brush="Black" Opacity="0.5" Radius="10" Offset="5,5"/>
+                </Frame.Shadow>
+                <Entry Margin="20,0,0,0" VerticalOptions="Center" Placeholder="Username" Keyboard="Email" />
+            </Frame>
+        </StackLayout>
+
+        <StackLayout Orientation="Horizontal">
+            <Frame ZIndex="1" HasShadow="True" BorderColor="White" HeightRequest="56" WidthRequest="56" CornerRadius="28">
+                <Frame.Shadow>
+                    <Shadow Brush="Black" Opacity="0.5" Radius="10" Offset="5,5"/>
+                </Frame.Shadow>
+                <Image Source="lock.png" HeightRequest="20" WidthRequest="20" />
+            </Frame>
+            <Frame HeightRequest="45" Margin="-20,0,0,0" Padding="0" HasShadow="True" BorderColor="White"  HorizontalOptions="FillAndExpand">
+                <Frame.Shadow>
+                    <Shadow Brush="Black" Opacity="0.5" Radius="10" Offset="5,5"/>
+                </Frame.Shadow>
+                <Entry Margin="20,0,0,0" VerticalOptions="Center" Placeholder="Password" IsPassword="True" />
+            </Frame>
+        </StackLayout>
+
+        <Button Text="Login" WidthRequest="150" CornerRadius="20" HorizontalOptions="Center" BackgroundColor="#0792ef" />
+
+        <StackLayout Orientation="Horizontal" Spacing="5" HorizontalOptions="Center">
+            <Label Text="Registrarse" TextColor="#50b3f2" />
+            <Label Text="|" TextColor="#50b3f2" />
+            <Label Text="¿Olvidaste tu contraseña?" TextColor="#50b3f2" />
+        </StackLayout>
+    </VerticalStackLayout>
+</ContentPage>

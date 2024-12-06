@@ -3,15 +3,7 @@
 	<PropertyGroup>
 		<TargetFrameworks>net8.0-android;net8.0-ios;net8.0-maccatalyst</TargetFrameworks>
 		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.19041.0</TargetFrameworks>
-		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
-		<!-- <TargetFrameworks>$(TargetFrameworks);net8.0-tizen</TargetFrameworks> -->
 
-		<!-- Note for MacCatalyst:
-		The default runtime is maccatalyst-x64, except in Release config, in which case the default is maccatalyst-x64;maccatalyst-arm64.
-		When specifying both architectures, use the plural <RuntimeIdentifiers> instead of the singular <RuntimeIdentifier>.
-		The Mac App Store will NOT accept apps with ONLY maccatalyst-arm64 indicated;
-		either BOTH runtimes must be indicated or ONLY macatalyst-x64. -->
-		<!-- For example: <RuntimeIdentifiers>maccatalyst-x64;maccatalyst-arm64</RuntimeIdentifiers> -->
 
 		<OutputType>Exe</OutputType>
 		<RootNamespace>NoteApp</RootNamespace>
@@ -57,11 +49,39 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Platforms\Android\Resources\values\strings.xml" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+		<PackageReference Include="Plugin.Firebase" Version="3.1.2" />
+		<PackageReference Include="Plugin.Firebase.Core" Version="3.1.0" />
+		<PackageReference Include="Plugin.Firebase.Crashlytics" Version="3.1.0" />
 	</ItemGroup>
 
+	<ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
+		<PackageReference Include="Xamarin.AndroidX.Core" Version="1.15.0.1" />
+		<PackageReference Include="Xamarin.AndroidX.Collection" Version="1.4.5.1" />
+		<PackageReference Include="Xamarin.AndroidX.Collection.Ktx" Version="1.4.5.1" />
+		<PackageReference Include="Xamarin.AndroidX.Activity.Ktx" Version="1.9.3.1" />
+		<PackageReference Include="Xamarin.AndroidX.Browser" Version="1.8.0.7" />
+		<PackageReference Include="Xamarin.AndroidX.Lifecycle.LiveData.Core" Version="2.8.7.1" />
+		<PackageReference Include="Xamarin.AndroidX.Lifecycle.LiveData.Core.Ktx" Version="2.8.7.1" />
+	</ItemGroup>
+	
+	<ItemGroup Condition="'$(TargetFramework)'  == 'net8.0-android'">
+	  <GoogleServicesJson Include="Platforms\Android\Resources\google-services.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<MauiAsset Include="Resources\drawable\notificacion.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<MauiImage Include="Resources\drawable\notificacion.png" />
+	</ItemGroup>
+	
 	<ItemGroup>
 	  <MauiXaml Update="Views\LoginPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>

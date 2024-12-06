@@ -1,3 +1,5 @@
+using Plugin.Firebase.CloudMessaging;
+
 namespace NoteApp.Views;
 
 public partial class RecoveryPasswordPage : ContentPage
@@ -6,4 +8,8 @@ public partial class RecoveryPasswordPage : ContentPage
 	{
 		InitializeComponent();
 	}
+
+    public async void RecoveryPasswordButton_Clicked(object sender, EventArgs e)
+    {
+    }
 }

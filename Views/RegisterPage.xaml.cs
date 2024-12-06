@@ -2,6 +2,7 @@ using NoteApp.Controllers.RegisterPage;
 using NoteApp.Models.RegisterPage;
 using NoteApp.Utils;
 using NoteApp.Views.Interfaces;
+using Plugin.Firebase.CloudMessaging;
 
 namespace NoteApp;
 
@@ -15,15 +16,34 @@ public partial class RegisterPage : ContentPage, RegisterPageViewInterface
 		InitializeComponent();
         this._controller = new RegisterPageController((RegisterPageViewInterface)this);
     }
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        await getTokenFCM();
+    }
 
+    private async Task getTokenFCM()
+    {
+        try
+        {
+            await CrossFirebaseCloudMessaging.Current.CheckIfValidAsync();
+            var token = await CrossFirebaseCloudMessaging.Current.GetTokenAsync();
+            Preferences.Set("tokenFCM", token);
+            Console.WriteLine(Preferences.Get("tokenFCM", ""));
+        }
+        catch (Exception e)
+        {
+            await DisplayAlert("", e.Message, "Ok");
+        }
+    }
     private async Task getData() {
-        string user = txtUserReg.Text.Trim();
-        string pass = txtPasswdReg.Text.Trim();
-        string pass2 = txtPasswdRegChk.Text.Trim();
-        string email = txtEmail.Text.Trim();
-        string name = txtNombre.Text.Trim();
-        string apellido = txtApellido.Text.Trim();
-        string telefono = txtPhone.Text.Trim();
+        string user = txtUserReg.Text;
+        string pass = txtPasswdReg.Text;
+        string pass2 = txtPasswdRegChk.Text;
+        string email = txtEmail.Text;
+        string name = txtNombre.Text;
+        string apellido = txtApellido.Text;
+        string telefono = txtPhone.Text;
         string fecha = txtFechaNacimiento.Date.ToString("yyyy-MM-dd");
         if(Validator.ValidateString(user) && Validator.ValidateString(pass) && Validator.ValidateString(pass2) && Validator.ValidateString(email)
             && Validator.ValidateString(name) && Validator.ValidateString(apellido) && Validator.ValidateString(telefono) && Validator.ValidateString(fecha)
@@ -39,7 +59,7 @@ public partial class RegisterPage : ContentPage, RegisterPageViewInterface
                 apellido = apellido,
                 telefono = telefono,
                 genero = Gender,
-                FCM = "FCM"
+                fcm = Preferences.Get("tokenFCM", "")
             };
             await _controller.RegisterUser(e);
             flushData();

@@ -3,6 +3,8 @@ using Views.Interfaces;
 using Controllers.Auth;
 using System.Windows.Input;
 using Utils;
+using Plugin.Firebase.CloudMessaging;
+using NoteApp.Views;
 
 public partial class LoginPage : ContentPage, AuthViewInterface
 {
@@ -13,6 +15,12 @@ public partial class LoginPage : ContentPage, AuthViewInterface
 		BindingContext = this;
 		_controller = new AuthController((AuthViewInterface)this);
 	}
+
+    protected override async void OnAppearing()
+    {
+		base.OnAppearing();
+		await RequestPermissions.CheckPermissionNotification();
+    }
 
     private async void LoginButton_Clicked(object sender, EventArgs e)
     {
@@ -47,4 +55,11 @@ public partial class LoginPage : ContentPage, AuthViewInterface
 	private async void ChangeView() {
 		await Navigation.PushAsync(new RegisterPage());
 	}
+
+	public ICommand RecoveryPassword => new Command(async () => RecoveryPasswordView());
+
+	private async void RecoveryPasswordView()
+    {
+        await Navigation.PushAsync(new RecoveryPasswordPage());
+    }
 }

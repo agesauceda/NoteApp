@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "526911606780",
+    "project_id": "msgremotes",
+    "storage_bucket": "msgremotes.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:526911606780:android:5c77a7dbc82e7c90dd6c79",
+        "android_client_info": {
+          "package_name": "com.companyname.fcmclient"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkoD9gn4p5LXq_SNIfxIRNNNfj0SAwWaw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:526911606780:android:cd5047d377c5b15ddd6c79",
+        "android_client_info": {
+          "package_name": "com.companyname.noteapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkoD9gn4p5LXq_SNIfxIRNNNfj0SAwWaw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -57,7 +57,11 @@
                             </Span.GestureRecognizers>
                         </Span>
                         <Span Text=" | " TextColor="#50b3f2"/>
-                        <Span Text="¿Olvidaste tu contraseña?" TextColor="#50b3f2"></Span>
+                        <Span Text="¿Olvidaste tu contraseña?" TextColor="#50b3f2">
+                            <Span.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding RecoveryPassword}"/>
+                            </Span.GestureRecognizers>
+                        </Span>
                     </FormattedString>
                 </Label.FormattedText>
             </Label>

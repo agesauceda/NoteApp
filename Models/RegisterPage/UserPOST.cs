@@ -10,6 +10,6 @@
         public string passwd { get; set; }
         public string fecha { get; set; }
         public string genero { get; set; }
-        public string FCM { get; set; }
+        public string fcm { get; set; }
     }
 }

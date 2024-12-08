@@ -67,7 +67,7 @@ namespace NoteApp.Controllers.Auth
                         else
                         {
                             Preferences.Remove("token");
-                            Console.WriteLine("Token Expirado Negro");
+                            Console.WriteLine("Token Expirado");
                         }
                     }
                     else {

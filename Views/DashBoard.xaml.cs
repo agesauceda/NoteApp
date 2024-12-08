@@ -8,7 +8,6 @@ public partial class DashBoard : ContentPage
 	}
     private async void OnAddNoteClicked(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync("///Notas");
-
+        await Navigation.PushAsync(new TextPage());
     }
 }

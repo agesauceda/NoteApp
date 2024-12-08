@@ -30,6 +30,7 @@ public partial class LoginPage : ContentPage, AuthViewInterface
 	public async Task Login() {
 		string token = Preferences.Get("token", "");
 		if (Validator.ValidateString(token)) {
+			await Navigation.PopAsync();
 			await Navigation.PushAsync(new DashBoard());
 		}
     }

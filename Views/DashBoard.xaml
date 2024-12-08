@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="NoteApp.Views.DashBoard"
-             xmlns:tabbar="clr-namespace:NoteApp.Views.components.Navbar"
+             Background="Black"
              Title="DashBoard">
 
     <ScrollView>
@@ -81,7 +81,6 @@
                     </StackLayout>
                 </ScrollView>
             </Grid>
-            <tabbar:TabBar></tabbar:TabBar>
             <Button Text="+" 
              FontSize="24" 
              TextColor="White" 

@@ -8,7 +8,7 @@
         <Frame BorderColor="Transparent" CornerRadius="8" BackgroundColor="Gray" WidthRequest="80"  HeightRequest="60" Margin="5,0">
             <Label Text="Texto" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" >
                 <Label.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="OnNavigateToText"/>
+                    <TapGestureRecognizer Command="{Binding OnNavigateToText}"/>
                 </Label.GestureRecognizers>
             </Label>
         </Frame>
@@ -16,7 +16,7 @@
         <Frame BorderColor="Transparent" CornerRadius="8" BackgroundColor="Gray" WidthRequest="80" Margin="5,0">
             <Label Text="Voz" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center">
                 <Label.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="OnNavigateToVoice"/>
+                    <TapGestureRecognizer Command="{Binding OnNavigateToVoice}"/>
                 </Label.GestureRecognizers>
             </Label>
         </Frame>
@@ -24,7 +24,7 @@
         <Frame BorderColor="Transparent" CornerRadius="8" BackgroundColor="Gray" WidthRequest="80"  Margin="5,0">
             <Label Text="Foto" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center">
                 <Label.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="OnNavigateToPhoto"/>
+                    <TapGestureRecognizer Command="{Binding OnNavigateToPhoto}"/>
                 </Label.GestureRecognizers>
             </Label>
         </Frame>
@@ -32,7 +32,7 @@
         <Frame BorderColor="Transparent" CornerRadius="8" BackgroundColor="#3D5AFE" WidthRequest="80"  Margin="5,0">
             <Label Text="Evento" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" >
                 <Label.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="OnNavigateToReminder"/>
+                    <TapGestureRecognizer Command="{Binding OnNavigateToReminder}"/>
                 </Label.GestureRecognizers>
             </Label>
         </Frame>

@@ -1,3 +1,5 @@
+using System.Windows.Input;
+
 namespace NoteApp.Views.components.Navbar;
 
 public partial class NavBar : ContentView
@@ -7,17 +9,8 @@ public partial class NavBar : ContentView
 		InitializeComponent();
 	}
 
-	private async void OnNavigateToText(object sender, EventArgs args) {
-		await Shell.Current.GoToAsync("///Text");
-	}
-
-	private async void OnNavigateToVoice(object sender, EventArgs args) {
-		await Shell.Current.GoToAsync("///Voice");
-	}
-	private async void OnNavigateToPhoto(object sender, EventArgs args) {
-		await Shell.Current.GoToAsync("///Photo");
-	}
-	private async void OnNavigateToReminder(object sender, EventArgs args) {
-		await Shell.Current.GoToAsync("///Reminder");
-	}
+	private ICommand OnNavigateToText => new Command(async () => await Navigation.PushAsync(new TextPage()));
+	private ICommand OnNavigateToVoice => new Command(async () => await Navigation.PushAsync(new VoicePage()));
+	private ICommand OnNavigateToPhoto => new Command(async () => await Navigation.PushAsync(new PhotoPage()));
+	private ICommand OnNavigateToReminder => new Command(() => Console.WriteLine("Si funciona"));
 }

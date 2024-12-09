@@ -81,6 +81,14 @@
 	<ItemGroup>
 		<MauiImage Include="Resources\drawable\notificacion.png" />
 	</ItemGroup>
+	<ItemGroup>
+	  <Compile Update="Views\ResetPassword.xaml.cs">
+	    <DependentUpon>ResetPassword.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\RecoveryPasswordCode.xaml.cs">
+	    <DependentUpon>RecoveryPasswordCode.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
 	
 	<ItemGroup>
 	  <MauiXaml Update="Views\components\Navbar\NavBar.xaml">
@@ -98,6 +106,12 @@
 	  <MauiXaml Update="Views\PhotoPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\ResetPassword.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\RecoveryPasswordCode.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\RecoveryPasswordPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -110,10 +124,6 @@
 	  <MauiXaml Update="Views\VoicePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	</ItemGroup>
-	
-	<ItemGroup>
-	  <Folder Include="Controllers\RecoveryPassword\" />
 	</ItemGroup>
 
 </Project>

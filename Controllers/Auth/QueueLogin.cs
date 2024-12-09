@@ -12,6 +12,7 @@ namespace NoteApp.Controllers.Auth
         private static QueueLogin _instance;
         private static readonly object _padLock = new object();
         private CancellationTokenSource _tokenSource;
+        private bool _isLogin { get; set; } = false;
         public QueueLogin() {
             _tokenSource = new CancellationTokenSource();
             StartVerificationToken();
@@ -26,8 +27,11 @@ namespace NoteApp.Controllers.Auth
                 return _instance;
             }
         }
-
-        public void Stop() {
+        public async Task<bool> ValidateInitialSession() {
+            await VerifyStatusSession();
+            return _isLogin;
+        }
+        private void Stop() {
             _tokenSource.Cancel();
         }
         private async void StartVerificationToken() {
@@ -73,6 +77,7 @@ namespace NoteApp.Controllers.Auth
                     else {
                         Console.WriteLine("Es nula la respuesta");
                     }
+                    _isLogin = response.isLogin.Value;
                 } catch (Exception e) {
                     Console.WriteLine(e.Message);
                 }

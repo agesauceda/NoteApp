@@ -111,5 +111,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
+	
+	<ItemGroup>
+	  <Folder Include="Controllers\RecoveryPassword\" />
+	</ItemGroup>
 
 </Project>

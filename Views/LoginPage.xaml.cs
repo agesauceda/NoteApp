@@ -19,7 +19,8 @@ public partial class LoginPage : ContentPage, AuthViewInterface
     protected override async void OnAppearing()
     {
 		base.OnAppearing();
-		await RequestPermissions.CheckPermissionNotification();
+        await RequestPermissions.CheckPermissionNotification();
+        await isLogin();
     }
 
     private async void LoginButton_Clicked(object sender, EventArgs e)
@@ -27,6 +28,11 @@ public partial class LoginPage : ContentPage, AuthViewInterface
 		await SendData();
 		await Login();
     }
+	private async Task isLogin() {
+		if (await App._queueLogin.ValidateInitialSession()) {
+            await Navigation.PushAsync(new DashBoard());
+        }
+	}
 	public async Task Login() {
 		string token = Preferences.Get("token", "");
 		if (Validator.ValidateString(token)) {
@@ -35,8 +41,8 @@ public partial class LoginPage : ContentPage, AuthViewInterface
 		}
     }
 	public async Task SendData() { 
-		string user = txtUsername.Text.Trim();
-		string pass = txtPassword.Text.Trim();
+		string user = txtUsername.Text;
+		string pass = txtPassword.Text;
 		if (!String.IsNullOrEmpty(user) && !String.IsNullOrWhiteSpace(user) && !String.IsNullOrEmpty(pass) && !String.IsNullOrWhiteSpace(pass) ) { 
             _controller.Login(user, pass);
 		}

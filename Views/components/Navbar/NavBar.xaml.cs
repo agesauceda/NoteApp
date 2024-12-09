@@ -4,10 +4,12 @@ namespace NoteApp.Views.components.Navbar;
 
 public partial class NavBar : ContentView
 {
-	public NavBar()
+	public INavigation Navigation { get; set; }
+    public NavBar()
 	{
 		InitializeComponent();
-	}
+        BindingContext = this;
+    }
 
 	private ICommand OnNavigateToText => new Command(async () => await Navigation.PushAsync(new TextPage()));
 	private ICommand OnNavigateToVoice => new Command(async () => await Navigation.PushAsync(new VoicePage()));

@@ -1,9 +1,6 @@
 ﻿using NoteApp.Models.common;
-using System;
 using System.Net.Http.Json;
 using System.Net.Http.Headers;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace NoteApp.Controllers.Auth
 {

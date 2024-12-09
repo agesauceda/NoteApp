@@ -1,6 +1,4 @@
-﻿using System.Text.RegularExpressions;
-
-namespace NoteApp.Utils
+﻿namespace NoteApp.Utils
 {
     public static class Validator
     {

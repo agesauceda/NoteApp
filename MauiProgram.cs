@@ -23,7 +23,7 @@ namespace NoteApp
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
-            builder.Services.AddSingleton(s => ActivatorUtilities.CreateInstance<Client.Client>(s, "http://34.57.178.166:15000/api/v1/"));
+            builder.Services.AddSingleton(s => ActivatorUtilities.CreateInstance<Client.Client>(s, "http://35.202.249.88:15000/api/v1/"));
             builder.Services.AddSingleton<QueueLogin>();
 
 #if DEBUG

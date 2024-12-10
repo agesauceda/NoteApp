@@ -92,7 +92,7 @@
                                        TextColor="White" 
                                        HorizontalOptions="Center" />
                                 <Label Text="4:00 a. m." 
-                                       x:Name="tiemeFinReminder"
+                                       x:Name="timeFinReminder"
                                        FontSize="12" 
                                        TextColor="Gray" 
                                        HorizontalOptions="Center" />

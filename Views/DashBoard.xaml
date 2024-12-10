@@ -8,12 +8,7 @@
 
     <Grid>
         <ScrollView>
-            <VerticalStackLayout Padding="10">
-                <dashboard:NoteVoiceDashboard />
-                <dashboard:NoteImgDashboard />
-                <dashboard:NoteTextDashboard />
-                <dashboard:ReminderDashboard />
-                <dashboard:NoteTextDashboard />
+            <VerticalStackLayout x:Name="DashboardContent" Padding="10">
 
             </VerticalStackLayout>
         </ScrollView>

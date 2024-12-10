@@ -6,13 +6,24 @@
              xmlns:dashboard="clr-namespace:NoteApp.Views.components.Dashboard"
              Title="DashBoard">
 
-    <ScrollView>
-        <VerticalStackLayout Padding="10" >
-            <dashboard:NoteVoiceDashboard></dashboard:NoteVoiceDashboard>
-            <dashboard:NoteImgDashboard></dashboard:NoteImgDashboard>
-            <dashboard:NoteTextDashboard></dashboard:NoteTextDashboard>
-            <dashboard:ReminderDashboard></dashboard:ReminderDashboard>
-        </VerticalStackLayout>
-    </ScrollView>
+    <Grid>
+        <ScrollView>
+            <VerticalStackLayout Padding="10">
+                <dashboard:NoteVoiceDashboard />
+                <dashboard:NoteImgDashboard />
+                <dashboard:NoteTextDashboard />
+                <dashboard:ReminderDashboard />
+                <dashboard:NoteTextDashboard />
 
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <ImageButton Source="add.png"
+                     HeightRequest="80"
+                     WidthRequest="80"
+                     BackgroundColor="Transparent"
+                     HorizontalOptions="End"
+                     VerticalOptions="End"
+                     Clicked="OnAddNoteClicked"/>
+    </Grid>
 </ContentPage>

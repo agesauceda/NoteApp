@@ -59,6 +59,7 @@
 		<PackageReference Include="Plugin.Firebase" Version="3.1.2" />
 		<PackageReference Include="Plugin.Firebase.Core" Version="3.1.0" />
 		<PackageReference Include="Plugin.Firebase.Crashlytics" Version="3.1.0" />
+		<PackageReference Include="SkiaSharp" Version="3.116.1" />
 	</ItemGroup>
 
 	<ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
@@ -84,6 +85,18 @@
 	
 	<ItemGroup>
 	  <MauiXaml Update="Views\AddNotas.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\components\Dashboard\NoteImgDashboard.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\components\Dashboard\NoteTextDashboard.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\components\Dashboard\NoteVoiceDashboard.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\components\Dashboard\ReminderDashboard.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\components\Navbar\NavBar.xaml">

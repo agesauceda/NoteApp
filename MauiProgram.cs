@@ -5,6 +5,7 @@ using Plugin.Firebase.Bundled.Shared;
 using Plugin.Firebase.Crashlytics;
 using Plugin.Firebase.Core;
 using NoteApp.Controllers.Auth;
+using Microsoft.Maui.Handlers;
 
 namespace NoteApp
 {
@@ -21,6 +22,7 @@ namespace NoteApp
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
+
             builder.Services.AddSingleton(s => ActivatorUtilities.CreateInstance<Client.Client>(s, "http://34.57.178.166:15000/api/v1/"));
             builder.Services.AddSingleton<QueueLogin>();
 

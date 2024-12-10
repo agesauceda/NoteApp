@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NoteApp.Views.components.Dashboard.ReminderDashboard">
+
+    <StackLayout Padding="10">
+        <SwipeView>
+            <SwipeView.RightItems>
+                <SwipeItems Mode="Reveal">
+                    <SwipeItem 
+                        BackgroundColor="White" 
+                        IconImageSource="delete.png" />
+                </SwipeItems>
+            </SwipeView.RightItems>
+
+            <Frame BackgroundColor="#2C2C2C" Padding="10" BorderColor="Gray" CornerRadius="10">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label Text="Title"
+                           x:Name="lbTitleReminder"
+                           TextColor="White"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           Grid.Row="0"
+                           Grid.Column="0"
+                           VerticalOptions="Center" />
+
+                    <Image Source="reminder.png"
+                           Grid.Row="0"
+                           Grid.Column="1"
+                           HeightRequest="30"
+                           WidthRequest="30"
+                           HorizontalOptions="End"
+                           VerticalOptions="Center" />
+
+                    <Grid Grid.Row="1" ColumnSpacing="0" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Label Text="Evento" 
+                               FontSize="18" 
+                               FontAttributes="Bold" 
+                               TextColor="White" 
+                               HorizontalOptions="Start"
+                               Grid.Row="0" 
+                               Grid.ColumnSpan="3" />
+
+                        <Grid Grid.Row="1" ColumnSpacing="0" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <VerticalStackLayout Grid.Column="0" HorizontalOptions="Center" Spacing="5" Margin="30,0,0,0">
+                                <Label Text="lun, 9 de dic" 
+                                       x:Name="dateIniReminder"
+                                       FontSize="14" 
+                                       TextColor="White" 
+                                       HorizontalOptions="Center" />
+                                <Label Text="3:00 a. m." 
+                                       x:Name="timeIniReminder"
+                                       FontSize="12" 
+                                       TextColor="Gray" 
+                                       HorizontalOptions="Center" />
+                            </VerticalStackLayout>
+
+                            <Label Text="➔" 
+                                   Grid.Column="1" 
+                                   FontSize="18" 
+                                   TextColor="White" 
+                                   VerticalOptions="Center" 
+                                   HorizontalOptions="Center" 
+                                   Margin="30,0,0,0"/>
+
+                            <VerticalStackLayout Grid.Column="2" HorizontalOptions="Center" Spacing="5" Margin="30,0,0,0">
+                                <Label Text="lun, 9 de dic" 
+                                       x:Name="dateFinReminder"
+                                       FontSize="14" 
+                                       TextColor="White" 
+                                       HorizontalOptions="Center" />
+                                <Label Text="4:00 a. m." 
+                                       x:Name="tiemeFinReminder"
+                                       FontSize="12" 
+                                       TextColor="Gray" 
+                                       HorizontalOptions="Center" />
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Grid>
+
+
+                    <Editor Text="Description jsjsdwdhwdhwduqdhuwq jasdashdouwhd jajdasjjaffdffsf" 
+                            x:Name="txtDescriptionReminder"
+                            TextColor="White"
+                            HeightRequest="60"
+                            IsReadOnly="True"
+                            Grid.Row="2"
+                            Grid.ColumnSpan="2" />
+
+                    <Label Text="23/01/24 03:30"
+                           x:Name="lbCreationReminder"
+                           TextColor="Gray"
+                           FontSize="10"
+                           FontAttributes="Italic"
+                           Grid.Row="3"
+                           Grid.Column="0"
+                           Grid.ColumnSpan="2"
+                           HorizontalOptions="End"
+                           VerticalOptions="Center" />
+                </Grid>
+            </Frame>
+        </SwipeView>
+    </StackLayout>
+</ContentView>

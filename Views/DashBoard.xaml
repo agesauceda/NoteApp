@@ -2,98 +2,16 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="NoteApp.Views.DashBoard"
-             Background="Black"
+             xmlns:tabbar="clr-namespace:NoteApp.Views.components.Navbar"
+             xmlns:dashboard="clr-namespace:NoteApp.Views.components.Dashboard"
              Title="DashBoard">
 
     <ScrollView>
-        <VerticalStackLayout Padding="10" Spacing="10">
-            <Grid RowDefinitions="Auto,Auto,*,Auto" ColumnDefinitions="*,Auto">
-
-                <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="0" HorizontalOptions="FillAndExpand">
-
-                    <Image Source="lupa.png" 
-                HeightRequest="24"
-                WidthRequest="24"
-                VerticalOptions="Center"
-                Margin="10,0,0,0" />
-
-                    <Entry Placeholder="Buscar notas..."
-                HorizontalOptions="FillAndExpand"
-                VerticalOptions="Center"
-                HeightRequest="40"
-                BackgroundColor="Transparent"
-                TextColor="White"
-                Margin="10,0" />
-                </StackLayout>
-
-                <Label Text="Notes"
-            FontSize="32"
-            FontAttributes="Bold"
-            TextColor="White"
-            Grid.Row="1"
-            Grid.ColumnSpan="2"
-            HorizontalOptions="Center" 
-            VerticalOptions="Center"
-            Margin="0,10,0,0" />
-
-                <ScrollView Grid.Row="2" Grid.ColumnSpan="2">
-                    <StackLayout Spacing="20" Padding="20">
-
-                        <Frame BackgroundColor="#2C2C2C" Padding="10" BorderColor="Gray" CornerRadius="10">
-                            <StackLayout>
-                                <Image Source="fototierna.jpg" Aspect="AspectFill" HeightRequest="200"/>
-                                <Label Text="Animalitos" TextColor="White" FontSize="18" FontAttributes="Bold"/>
-                                <Label Text="Como podemos observar hay una foto de animalitos lindos para todo el mundo, los reptiles, anfibios e insectos no son tiernos OK" TextColor="White" />
-                            </StackLayout>
-                        </Frame>
-
-                        <Frame BackgroundColor="#2C2C2C" Padding="10" BorderColor="Gray" CornerRadius="10">
-                            <StackLayout>
-                                <Label Text="Presentación de Proyecto Final"
-                            TextColor="White"
-                            FontSize="20"
-                            FontAttributes="Bold"/>
-                                <Label Text="Terminar las vistas de Voice y Photo " TextColor="White" />
-                                <Label Text="20:30, Noviembre 20" TextColor="White" />
-                            </StackLayout>
-                        </Frame>
-
-                        <Frame BackgroundColor="#2C2C2C" Padding="10" BorderColor="Gray" CornerRadius="10">
-                            <StackLayout>
-                                <Label Text="Importante"
-                            TextColor="White"
-                            FontSize="20"
-                            FontAttributes="Bold"/>
-                                <Label Text="Explicacion de como funciona la app" TextColor="White"/>
-                                <Button Text="Play Audio" TextColor="White" BackgroundColor="#2E8B57" />
-                            </StackLayout>
-                        </Frame>
-
-                        <Frame BackgroundColor="#2C2C2C" Padding="10" BorderColor="Gray" CornerRadius="10">
-                            <StackLayout>
-                                <Label Text="Dominar la gramática inglesa"
-                            TextColor="White"
-                            FontSize="20"
-                            FontAttributes="Bold"/>
-                                <Label Text="Mejorar tu gramática comienza con la práctica diaria. Lee libros, escribe pequeños párrafos y aprende de tus errores. Concéntrate en una regla a la vez para evitar sentirte abrumado." TextColor="White"/>
-                            </StackLayout>
-                        </Frame>
-                    </StackLayout>
-                </ScrollView>
-            </Grid>
-            <Button Text="+" 
-             FontSize="24" 
-             TextColor="White" 
-             BackgroundColor="#3D5AFE" 
-             CornerRadius="20" 
-             HeightRequest="56" 
-             WidthRequest="56" 
-             Grid.Row="3" 
-             Grid.Column="1" 
-             VerticalOptions="End" 
-             HorizontalOptions="End" 
-             Margin="10" 
-             Clicked="OnAddNoteClicked"/>
+        <VerticalStackLayout Padding="10" >
+            <dashboard:NoteVoiceDashboard></dashboard:NoteVoiceDashboard>
+            <dashboard:NoteImgDashboard></dashboard:NoteImgDashboard>
+            <dashboard:NoteTextDashboard></dashboard:NoteTextDashboard>
+            <dashboard:ReminderDashboard></dashboard:ReminderDashboard>
         </VerticalStackLayout>
     </ScrollView>
 

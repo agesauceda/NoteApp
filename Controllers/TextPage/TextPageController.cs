@@ -11,11 +11,10 @@ namespace NoteApp.Controllers.NotePage
         private readonly TextPageService _service;
         private readonly TextPageViewInterface _view;
 
-        // Constructor que recibe la vista
         public TextPageController(TextPageViewInterface view)
         {
-            _service = new TextPageService(_client); // Instancia del servicio
-            _view = view; // Referencia de la vista
+            _service = new TextPageService(_client); 
+            _view = view; 
         }
 
         // Método para crear una nota
@@ -31,5 +30,26 @@ namespace NoteApp.Controllers.NotePage
                 await _view.CreateNote(response.message ?? "Error al crear la nota");
             }
         }
+
+        // Método para actualizar una nota
+        public async Task UpdateNote(int id, NoteTextPOST e)
+        {
+            ApiResponse response = await _service.UpdateNote(id, e);
+            if ((bool)response.status)
+            {
+                await _view.UpdateNote("Nota actualizada exitosamente");
+            }
+            else
+            {
+                await _view.UpdateNote(response.message ?? "Error al actualizar la nota");
+            }
+        }
+
+        // Método para cargar los datos 
+        public async Task<NoteTextPOST?> GetNoteForEdit(int id)
+        {
+            return await _service.GetNoteForEdit(id); // Devuelve los datos de la nota.
+        }
+
     }
 }

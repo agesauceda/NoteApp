@@ -49,6 +49,16 @@ public partial class TextPage : ContentPage, TextPageViewInterface
         await DisplayAlert("Resultado", msg, "OK");
         // ClearFields(); 
     }
+
+    public Task UpdateNote(string msg)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task LoadNoteForEdit(NoteTextPOST note)
+    {
+        throw new NotImplementedException();
+    }
     //para limpiar
     //private void ClearFields()
     //{
@@ -56,5 +66,5 @@ public partial class TextPage : ContentPage, TextPageViewInterface
     //    txtDescription.Text = string.Empty;
     //}
 
-  
+
 }

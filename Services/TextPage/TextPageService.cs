@@ -15,11 +15,6 @@ namespace NoteApp.Services.NotePage
             _client = client;
         }
 
-        //public Task<ApiResponse> CreateNote(NoteTextPOST e)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
         // Crear una nueva nota
         public async Task<ApiResponse> CreateNote(NoteTextPOST? note)
         {
@@ -34,6 +29,37 @@ namespace NoteApp.Services.NotePage
                     }
                 }
                 return new ApiResponse { status = false, message = "Error al crear la nota" };
+            }
+        }
+
+        // Cargar los datos por Id
+        public async Task<NoteTextPOST?> GetNoteForEdit(int id)
+        {
+            using (HttpResponseMessage response = await _client.GetAsync($"notasTexto/{id}"))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    var note = await response.Content.ReadFromJsonAsync<NoteTextPOST>();
+                    return note;
+                }
+                return null; // si la nota es null
+            }
+        }
+
+        // Actualizar una nota
+        public async Task<ApiResponse> UpdateNote(int id, NoteTextPOST? note)
+        {
+            using (HttpResponseMessage response = await _client.PutAsJsonAsync($"notasTexto/{id}", note))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadFromJsonAsync<ApiResponse>();
+                    if (content != null)
+                    {
+                        return content;
+                    }
+                }
+                return new ApiResponse { status = false, message = "Error al actualizar la nota" };
             }
         }
     }

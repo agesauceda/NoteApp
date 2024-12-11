@@ -12,7 +12,8 @@
                                  IconImageSource="delete.png"/>
                     <SwipeItem 
                                  BackgroundColor="White" 
-                                 IconImageSource="edit.png" />
+                                 IconImageSource="edit.png"
+                                 Invoked="OnEditClicked"/>
                 </SwipeItems>
             </SwipeView.RightItems>
 

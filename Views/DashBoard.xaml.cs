@@ -30,7 +30,15 @@ public partial class DashBoard : ContentPage, DashboardViewInterface
             for (int i = 0; i < list.Count; i++) {
                 switch (list[i].tipoNota) {
                     case "TEXTO":
-                        DashboardContent.Add(new NoteTextDashboard(list[i]));
+                        //DashboardContent.Add(new NoteTextDashboard(list[i]));
+                        var noteTextDashboard = new NoteTextDashboard(list[i]);
+
+                        noteTextDashboard.NoteClicked += async (sender, noteId) =>
+                        {
+                            await Navigation.PushAsync(new TextPageUpdate(noteId));
+                        };
+
+                        DashboardContent.Add(noteTextDashboard);
                         break;
                     case "IMAGEN":
                         DashboardContent.Add(new NoteImgDashboard(list[i]));

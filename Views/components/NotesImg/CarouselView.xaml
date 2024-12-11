@@ -21,7 +21,7 @@
                     <x:Array Type="{x:Type x:String}">
                         <x:String>Resources/Images/pin.png</x:String>
                         <x:String>Resources/Images/imagen.png</x:String>
-                        <x:String>Resources/Images/delete.png</x:String>
+                       
                     </x:Array>
                 </CarouselView.ItemsSource>
 

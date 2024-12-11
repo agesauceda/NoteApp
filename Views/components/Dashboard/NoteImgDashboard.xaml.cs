@@ -15,6 +15,7 @@ public partial class NoteImgDashboard : ContentView
 	private void InitComponent() {
 		lbTitleImg.Text = element.titulo;
 		txtDescriptionImg.Text = element.contenido;
-		lbCreationImg.Text = element.fechaCreacion;
+		var fecha = DateTime.Parse(element.fechaCreacion).ToString("dd/MM/yy HH:mm");
+		lbCreationImg.Text = fecha;
     }
 }

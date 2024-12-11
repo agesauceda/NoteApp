@@ -13,6 +13,7 @@ public partial class NoteVoiceDashboard : ContentView
 	private void InitComponent() { 
 		lbTitleVoice.Text = element.titulo;
 		txtDescriptionVoice.Text = element.contenido;
+		var fecha = DateTime.Parse(element.fechaCreacion).ToString("dd/MM/yy HH:mm");
 		lbCreationVoice.Text = element.fechaCreacion;
     }
 }

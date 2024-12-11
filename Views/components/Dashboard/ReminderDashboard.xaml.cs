@@ -12,12 +12,12 @@ public partial class ReminderDashboard : ContentView
 	}
 	private void InitComponent() {
 		lbTitleReminder.Text = element.titulo;
-		dateIniReminder.Text = element.fechaInicio;
-		timeIniReminder.Text = element.fechaInicio;
-		dateFinReminder.Text = element.fechaFinal;
-		timeFinReminder.Text = element.fechaFinal;
+		dateIniReminder.Text = DateTime.Parse(element.fechaInicio).ToString("dd/MM/yyyy");
+		timeIniReminder.Text = DateTime.Parse(element.fechaInicio).ToString("HH:mm");
+		dateFinReminder.Text = DateTime.Parse(element.fechaFinal).ToString("dd/MM/yyyy");
+		timeFinReminder.Text = DateTime.Parse(element.fechaFinal).ToString("HH:mm");
 		txtDescriptionReminder.Text = element.contenido;
-		lbCreationReminder.Text = element.fechaCreacion;
+		lbCreationReminder.Text = DateTime.Parse(element.fechaCreacion).ToString("dd/MM/yy HH:mm");
 
     }
 }

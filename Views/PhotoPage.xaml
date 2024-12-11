@@ -24,7 +24,8 @@
                    BorderColor="White">
                 <VerticalStackLayout Spacing="10">
 
-                    <Entry Text="Title" 
+                    <Entry Placeholder="Title" 
+                           x:Name="txtTitulo"
                            TextColor="Gray" 
                            FontSize="20" 
                            FontAttributes="Bold" />
@@ -34,24 +35,27 @@
                            FontSize="18" 
                            FontAttributes="Bold" />
 
-                    <Editor Placeholder="Type your note here..." 
+                    <Editor Placeholder="Type your note here..."
+                            x:Name="txtDescription"
                             BackgroundColor="Transparent" 
                             TextColor="White" 
                             HeightRequest="100" />
 
-                    <carousel:CarouselView/>
+                    <carousel:CarouselView x:Name="CarrouselObject"/>
 
                     <ImageButton Source="camera.png" 
                                          WidthRequest="50" 
                                          HeightRequest="50" 
-                                         HorizontalOptions="Center" />
+                                         HorizontalOptions="Center" 
+                                         Clicked="OnPickPhotoButtonClicked"/>
                 </VerticalStackLayout>
             </Frame>
 
             <Button Text="Save Note" 
                     BackgroundColor="#3D5AFE" 
                     TextColor="White" 
-                    CornerRadius="8" />
+                    CornerRadius="8"
+                    Clicked="OnSaveButtonClicked"/>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

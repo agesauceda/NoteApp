@@ -15,24 +15,21 @@
                FontSize="18" 
                FontAttributes="Bold" />
 
-            <CarouselView HeightRequest="100" 
+            <CarouselView x:Name="Carrousel" HeightRequest="100" 
                       IndicatorView="carouselIndicator">
-                <CarouselView.ItemsSource>
-                    <x:Array Type="{x:Type x:String}">
-                        <x:String>Resources/Images/pin.png</x:String>
-                        <x:String>Resources/Images/imagen.png</x:String>
-                        <x:String>Resources/Images/delete.png</x:String>
-                    </x:Array>
-                </CarouselView.ItemsSource>
-
                 <CarouselView.ItemTemplate>
-                    <DataTemplate>
+                    <DataTemplate x:Name="ContentImages">
                         <Image Source="{Binding}" 
                            Aspect="AspectFill" 
                            HeightRequest="100" 
-                           WidthRequest="100" />
+                           WidthRequest="100">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnDeleteTapped" NumberOfTapsRequired="2" />
+                            </Image.GestureRecognizers>
+                        </Image>
                     </DataTemplate>
                 </CarouselView.ItemTemplate>
+
             </CarouselView>
 
             <IndicatorView x:Name="carouselIndicator" 

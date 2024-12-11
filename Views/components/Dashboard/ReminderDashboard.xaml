@@ -7,9 +7,12 @@
         <SwipeView>
             <SwipeView.RightItems>
                 <SwipeItems Mode="Reveal">
+                  <SwipeItem 
+                                 BackgroundColor="White" 
+                                 IconImageSource="delete.png"/>
                     <SwipeItem 
-                        BackgroundColor="White" 
-                        IconImageSource="delete.png" />
+                                 BackgroundColor="White" 
+                                 IconImageSource="edit.png" />
                 </SwipeItems>
             </SwipeView.RightItems>
 
@@ -101,7 +104,7 @@
                     </Grid>
 
 
-                    <Editor Text="Description jsjsdwdhwdhwduqdhuwq jasdashdouwhd jajdasjjaffdffsf" 
+                    <Editor Text="" 
                             x:Name="txtDescriptionReminder"
                             TextColor="White"
                             HeightRequest="60"

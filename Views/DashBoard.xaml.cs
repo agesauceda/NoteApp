@@ -24,6 +24,7 @@ public partial class DashBoard : ContentPage, DashboardViewInterface
     public Task GetDashboard(List<ObjectDashBoard> list)
     {
         _list = list;
+        DashboardContent.Clear();
         if(list.Count > 0)
         {
             for (int i = 0; i < list.Count; i++) {

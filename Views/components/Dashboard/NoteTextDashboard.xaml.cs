@@ -14,6 +14,7 @@ public partial class NoteTextDashboard : ContentView
 	private void InitComponent() {
 		lbTitleText.Text = element.titulo;
 		txtDescriptionText.Text = element.contenido;
-		lbCreationText.Text = element.fechaCreacion;
+		var fecha = DateTime.Parse(element.fechaCreacion).ToString("dd/MM/yy HH:mm");
+        lbCreationText.Text = fecha;
 	}
 }

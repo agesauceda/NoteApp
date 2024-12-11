@@ -15,16 +15,15 @@
              HorizontalOptions="Center" />
 
             <navbar:NavBar x:Name="navBar"></navbar:NavBar>
-            
-            <Entry Text="Title" TextColor="Gray" FontSize="20" FontAttributes="Bold" />
+            <Entry x:Name="txtTitle" Text="Title" TextColor="Gray" FontSize="20" FontAttributes="Bold" />
             <Label Text="Description" TextColor="Gray" FontSize="18" Margin="0,30,0,0"  FontAttributes="Bold" />
-            <Editor Placeholder="Type your note here..." BackgroundColor="Transparent" TextColor="White" HeightRequest="280" />
+            <Editor x:Name="txtDescription" Placeholder="Type your note here..." BackgroundColor="Transparent" TextColor="White" HeightRequest="280" />
 
             <HorizontalStackLayout Margin="0,10,0,10" Spacing="15">
 
             </HorizontalStackLayout>
 
-            <Button Text="Save Note" BackgroundColor="#3D5AFE" TextColor="White" CornerRadius="8" Margin="10"/>
+            <Button Text="Save Note" BackgroundColor="#3D5AFE" TextColor="White" CornerRadius="8" Margin="10" Clicked="SaveNoteButton_Clicked"/>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

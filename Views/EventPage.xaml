@@ -4,31 +4,122 @@
              x:Class="NoteApp.Views.EventPage"
              xmlns:navbar="clr-namespace:NoteApp.Views.components.Navbar"
              Background="Black"
-             Title="EventPage">
+             Title="">
 
     <ScrollView>
         <VerticalStackLayout Padding="20">
-            <Label Text="Add Notes"
-     TextColor="White"
-     FontSize="24"
-     Margin="0,10,0,40"
-     FontAttributes="Bold"
-     HorizontalOptions="Center" />
+            <Label Text="Notes"
+                   TextColor="White"
+                   FontSize="24"
+                   Margin="0,10,0,10"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center" />
 
+            <navbar:NavBar />
 
-            <navbar:NavBar></navbar:NavBar>
+            <Frame Margin="0,10,0,0" 
+                   Padding="10" 
+                   BackgroundColor="#202020" 
+                   CornerRadius="12" 
+                   BorderColor="White"
+                   VerticalOptions="Center" 
+                   HorizontalOptions="FillAndExpand">
 
-            <Entry Text="Title" TextColor="Gray" FontSize="20" FontAttributes="Bold" />
-            <Label Text="Description" TextColor="Gray" FontSize="18" Margin="0,30,0,0"  FontAttributes="Bold" />
-            <Editor Placeholder="Type your note here..." BackgroundColor="Transparent" TextColor="White" HeightRequest="280" />
+                <VerticalStackLayout Spacing="0">
+                    <Entry Placeholder="Title" 
+                           TextColor="Gray" 
+                           FontSize="20" 
+                           FontAttributes="Bold" 
+                           BackgroundColor="Transparent" 
+                           Margin="0,0,0,0" />
 
+                    <Grid ColumnSpacing="0" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
 
-            <HorizontalStackLayout Margin="0,10,0,10" Spacing="15">
+                        <VerticalStackLayout Grid.Column="0" HorizontalOptions="Center">
+                            <DatePicker Format="dd MMMM yyyy" TextColor="White" />
+                            <TimePicker Format="hh:mm tt" TextColor="White" Margin="25,0,0,0" />
+                        </VerticalStackLayout>
 
-            </HorizontalStackLayout>
+                        <Label Text="➔"
+                               Grid.Column="1"
+                               FontSize="18"
+                               TextColor="White"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center"
+                               Margin="15,0,10,0" />
 
-            <Button Text="Save Note" BackgroundColor="#3D5AFE" TextColor="White" CornerRadius="8" Margin="10"/>
+                        <VerticalStackLayout Grid.Column="2" HorizontalOptions="Center">
+                            <DatePicker Format="dd MMMM yyyy" TextColor="White" />
+                            <TimePicker Format="hh:mm tt" TextColor="White" Margin="25,0,0,0" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame Margin="0,20,0,0" 
+                   Padding="15" 
+                   BackgroundColor="#202020" 
+                   CornerRadius="12" 
+                   BorderColor="White"
+                   VerticalOptions="Center" 
+                   HorizontalOptions="FillAndExpand">
+
+                <VerticalStackLayout Spacing="20">
+                    <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                        <Image Source="pin.png" HeightRequest="24" WidthRequest="24" VerticalOptions="Center" />
+                        <Entry Placeholder="Location" 
+                               PlaceholderColor="Gray" 
+                               FontSize="18" 
+                               FontAttributes="Bold" 
+                               HorizontalOptions="FillAndExpand" 
+                               BackgroundColor="Transparent" />
+                    </HorizontalStackLayout>
+
+                    <HorizontalStackLayout Spacing="10">
+                        <Image Source="imagen.png" HeightRequest="24" WidthRequest="24" VerticalOptions="Start" />
+                        <Frame Padding="0" 
+                               BorderColor="Gray" 
+                               BackgroundColor="Transparent" 
+                               CornerRadius="8" 
+                               HasShadow="False" 
+                               WidthRequest="120" 
+                               HeightRequest="100" />
+                    </HorizontalStackLayout>
+
+                    <Frame Margin="0,10,0,0" 
+                           Padding="10" 
+                           BackgroundColor="#303030" 
+                           CornerRadius="12" 
+                           BorderColor="Gray"
+                           VerticalOptions="Center" 
+                           HorizontalOptions="FillAndExpand">
+                        <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                            <Image Source="note.png" HeightRequest="24" WidthRequest="24" VerticalOptions="Start" />
+                            <VerticalStackLayout>
+                                <Label Text="Notes" 
+                                       TextColor="Gray" 
+                                       FontSize="18" 
+                                       FontAttributes="Bold" />
+                                <Editor Placeholder="Type your note here..." 
+                                        BackgroundColor="Transparent" 
+                                        TextColor="White" 
+                                        HeightRequest="100" />
+                            </VerticalStackLayout>
+                        </HorizontalStackLayout>
+                    </Frame>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Button Text="Save Note"
+                    BackgroundColor="#3D5AFE"
+                    TextColor="White"
+                    CornerRadius="8"
+                    Margin="10" />
         </VerticalStackLayout>
     </ScrollView>
-
 </ContentPage>

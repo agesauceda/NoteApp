@@ -34,7 +34,7 @@
                BackgroundColor="Gray"
                WidthRequest="85"
                HeightRequest="60">
-            <Label Text="Voz"
+            <Label Text="Voice"
                    TextColor="White"
                    FontSize="14"
                    HorizontalOptions="Center"
@@ -51,7 +51,7 @@
                BackgroundColor="Gray"
                WidthRequest="85"
                HeightRequest="60">
-            <Label Text="Foto"
+            <Label Text="Photo"
                    TextColor="White"
                    FontSize="14"
                    HorizontalOptions="Center"

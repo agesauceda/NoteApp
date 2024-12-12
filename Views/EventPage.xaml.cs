@@ -23,13 +23,12 @@ public partial class EventPage : ContentPage, EventPageViewInterface
 
    
     private async Task getData() {
-		string imagen_uri = "";
 
 		try {
         string titulo = txtTitulo.Text;
         string descripcion = txtDescripcion.Text;
         string ubicacion = txtUbicacion.Text;
-        string imagen = imagen_uri;
+       // string imagen = txtImagen.Content;
         string fecha_inicio = txtFechaIni.Date.ToString("yyyy-MM-dd");
         string fecha_final= txtFechaFin.Date.ToString("yyyy-MM-dd");
 		string hora_final = new DateTime(txtHoraFin.Time.Ticks).ToString("HH:mm:ss");
@@ -38,14 +37,14 @@ public partial class EventPage : ContentPage, EventPageViewInterface
 		Console.WriteLine($"Título: {titulo}");
 		Console.WriteLine($"Descripción: {descripcion}");
 		Console.WriteLine($"Ubicación: {ubicacion}");
-		Console.WriteLine($"Imagen: {imagen}");
+		//Console.WriteLine($"Imagen: {imagen}");
 		Console.WriteLine($"Fecha inicio: {fecha_inicio}");
 		Console.WriteLine($"Fecha final: {fecha_final}");
 		Console.WriteLine($"Hora inicio: {hora_inicio}");
 		Console.WriteLine($"Hora final: {hora_final}");
 
 
-        if(Validator.ValidateString(titulo) && Validator.ValidateString(descripcion) && Validator.ValidateString(ubicacion) && Validator.ValidateString(imagen)
+        if(Validator.ValidateString(titulo) && Validator.ValidateString(descripcion) && Validator.ValidateString(ubicacion) 
             && Validator.ValidateString(fecha_inicio) && Validator.ValidateString(fecha_final))
         {
             e = new ReminderPOST
@@ -53,7 +52,7 @@ public partial class EventPage : ContentPage, EventPageViewInterface
                 titulo = titulo,
                 descripcion = descripcion,
                 ubicacion = ubicacion,
-                imagen = imagen,
+              //  imagen = imagen,
                 fecha_inicio = fecha_inicio + " " + hora_inicio,
                 fecha_final = fecha_final + " " + hora_final,
                

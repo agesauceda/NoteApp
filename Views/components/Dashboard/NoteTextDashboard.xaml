@@ -9,7 +9,8 @@
                 <SwipeItems Mode="Reveal">
                     <SwipeItem 
                                  BackgroundColor="White" 
-                                 IconImageSource="delete.png"/>
+                                 IconImageSource="delete.png"
+                                 Clicked="OnDeleteClicked"/>
                     <SwipeItem 
                                  BackgroundColor="White" 
                                  IconImageSource="edit.png"

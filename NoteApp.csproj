@@ -57,10 +57,12 @@
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+		<PackageReference Include="CommunityToolkit.Maui.MediaElement" Version="4.1.2" />
 		<PackageReference Include="Plugin.Firebase" Version="3.1.2" />
 		<PackageReference Include="Plugin.Firebase.Core" Version="3.1.0" />
 		<PackageReference Include="Plugin.Firebase.Crashlytics" Version="3.1.0" />
 		<PackageReference Include="SkiaSharp" Version="3.116.1" />
+		<PackageReference Include="Plugin.Maui.Audio" Version="3.0.1" />
 	</ItemGroup>
 
 	<ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">

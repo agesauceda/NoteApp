@@ -6,6 +6,8 @@ using Plugin.Firebase.Crashlytics;
 using Plugin.Firebase.Core;
 using NoteApp.Controllers.Auth;
 using Microsoft.Maui.Handlers;
+using CommunityToolkit.Maui;
+using Plugin.Maui.Audio;
 
 namespace NoteApp
 {
@@ -16,6 +18,7 @@ namespace NoteApp
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseMauiCommunityToolkitMediaElement()
                 .RegisterFirebaseServices()
                 .ConfigureFonts(fonts =>
                 {
@@ -28,6 +31,8 @@ namespace NoteApp
 
 #if DEBUG
             builder.Logging.AddDebug();
+            builder.AddAudio();
+
 #endif
 
             return builder.Build();

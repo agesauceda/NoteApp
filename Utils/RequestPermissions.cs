@@ -13,6 +13,26 @@
                 Console.WriteLine("Permission denied");
             }
         }
+
+        public static async Task<bool> CheckPermissionMicrophoneAsync()
+        {
+            try
+            {
+                var status = await Permissions.CheckStatusAsync<Permissions.Microphone>();
+                if (status != PermissionStatus.Granted)
+                {
+                    status = await Permissions.RequestAsync<Permissions.Microphone>();
+                }
+                return status == PermissionStatus.Granted;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error checking microphone permission: " + ex.Message);
+                return false;
+            }
+        }
+
+
         public static async Task<string?> CheckPermissionCameraAsync()
         {
             string localPath = null;

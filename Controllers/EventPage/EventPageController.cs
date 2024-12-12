@@ -17,6 +17,16 @@ namespace NoteApp.Controllers.EventPage
         public async Task InsertReminder(ReminderPOST e)
         {
             ApiResponseReminder response = await _service.InsertReminder(e);
+
+            string datos = response.data != null ? string.Join(", ", response.data.Select(r => r.ToString())) : "Sin datos";
+            await App.Current.MainPage.DisplayAlert(
+                "Respuesta del Servidor",
+                $"Estado: {(response.status.HasValue ? response.status.Value.ToString() : "Nulo")}\n" +
+                $"Mensaje: {response.message}\n" +
+                $"Datos: {datos}",
+                "OK"
+            );
+
             if (response.status.Value)
             {
                 await _view.InsertReminder(response.message);

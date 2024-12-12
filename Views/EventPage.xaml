@@ -48,7 +48,9 @@
                             <DatePicker x:Name="txtFechaIni"
                                     Format="dd MMMM yyyy"
                                     TextColor="White"/>
-                            <TimePicker Format="hh:mm tt"
+                            <TimePicker 
+                                    x:Name="txtHoraIni"
+                                    Format="hh:mm tt"
                                     TextColor="White"
                                     Margin="25,0,0,0"/>
                         </VerticalStackLayout>
@@ -66,7 +68,9 @@
                             <DatePicker x:Name="txtFechaFin"
                                     Format="dd MMMM yyyy"
                                     TextColor="White"/>
-                            <TimePicker Format="hh:mm tt"
+                            <TimePicker
+                                    x:Name="txtHoraFin"
+                                    Format="hh:mm tt"
                                     TextColor="White"
                                     Margin="25,0,0,0"/>
                         </VerticalStackLayout>

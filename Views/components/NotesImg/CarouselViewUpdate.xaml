@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NoteApp.Views.components.NotesImg.CarouselViewUpdate">
+    
+    <Frame Margin="0,10,0,0"
+       Padding="10"
+       BackgroundColor="#303030"
+       CornerRadius="12"
+       BorderColor="White">
+        <VerticalStackLayout Spacing="10">
+
+            <Label Text="Gallery" 
+               TextColor="Gray" 
+               FontSize="18" 
+               FontAttributes="Bold" />
+
+            <CarouselView x:Name="Carrousel" HeightRequest="100" 
+                      IndicatorView="carouselIndicator">
+                <CarouselView.ItemTemplate>
+                    <DataTemplate x:Name="ContentImages">
+                        <Image Source="{Binding}" 
+                           Aspect="AspectFill" 
+                           HeightRequest="100" 
+                           WidthRequest="100">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnDeleteTapped" NumberOfTapsRequired="2" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+
+            </CarouselView>
+
+            <IndicatorView x:Name="carouselIndicator" 
+                       IndicatorColor="Gray" 
+                       SelectedIndicatorColor="White" 
+                       HorizontalOptions="Center" />
+        </VerticalStackLayout>
+    </Frame>
+</ContentView>

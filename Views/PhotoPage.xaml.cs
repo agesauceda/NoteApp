@@ -51,4 +51,14 @@ public partial class PhotoPage : ContentPage, PhotoPageViewInterface
     {
         await DisplayAlert("Registro de Nota", msg, "Aceptar");
     }
+
+    public Task getImages(List<ImgNoteGET> imgs)
+    {
+        return Task.CompletedTask;
+    }
+
+    public Task updateNotePhoto(string msg)
+    {
+        return Task.CompletedTask;
+    }
 }

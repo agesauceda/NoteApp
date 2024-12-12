@@ -17,14 +17,13 @@ public partial class DashBoard : ContentPage, DashboardViewInterface
     protected async override void OnAppearing()
     {
         base.OnAppearing();
-        if (_list.Count <= 0) { 
-            await _controller.GetDashboard();
-        }
+        await _controller.GetDashboard();
     }
+
     public Task GetDashboard(List<ObjectDashBoard> list)
     {
         _list = list;
-        DashboardContent.Clear();
+            DashboardContent.Clear();
         if(list.Count > 0)
         {
             for (int i = 0; i < list.Count; i++) {

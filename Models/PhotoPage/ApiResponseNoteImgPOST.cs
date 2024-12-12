@@ -10,6 +10,8 @@ namespace NoteApp.Models.PhotoPage
         public int? statusCode { get; set; }
         [JsonPropertyName("message")]
         public string? message { get; set; }
+        [JsonPropertyName("data")]
+        public ImgNotePOST data { get; set; }
         [JsonPropertyName("isLogin")]
         public bool? isLogin { get; set; }
         [JsonPropertyName("timestamp")]

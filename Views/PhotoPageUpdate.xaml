@@ -1,0 +1,58 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NoteApp.Views.PhotoPageUpdate"
+             xmlns:carousel="clr-namespace:NoteApp.Views.components.NotesImg"
+             Title=""
+             Background="Black">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20">
+            <Label Text="Notes"
+                   TextColor="White"
+                   FontSize="24"
+                   Margin="0,10,0,10"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center" />
+
+            <Frame Margin="0,10,0,20"
+                   Padding="10"
+                   BackgroundColor="#202020"
+                   CornerRadius="12"
+                   BorderColor="White">
+                <VerticalStackLayout Spacing="10">
+
+                    <Entry Placeholder="Title" 
+                           x:Name="txtTitulo"
+                           TextColor="Gray" 
+                           FontSize="20" 
+                           FontAttributes="Bold" />
+
+                    <Label Text="Description" 
+                           TextColor="Gray" 
+                           FontSize="18" 
+                           FontAttributes="Bold" />
+
+                    <Editor Placeholder="Type your note here..."
+                            x:Name="txtDescription"
+                            BackgroundColor="Transparent" 
+                            TextColor="White" 
+                            HeightRequest="100" />
+
+                    <carousel:CarouselViewUpdate x:Name="CarrouselObject"/>
+
+                    <ImageButton Source="camera.png" 
+                                         WidthRequest="50" 
+                                         HeightRequest="50" 
+                                         HorizontalOptions="Center" 
+                                         Clicked="OnPickPhotoButtonClicked"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Button Text="Save Note" 
+                    BackgroundColor="#3D5AFE" 
+                    TextColor="White" 
+                    CornerRadius="8"
+                    Clicked="OnUpdateButtonClicked"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

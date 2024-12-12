@@ -1,4 +1,5 @@
 using NoteApp.Controllers.NotePage;
+using NoteApp.Models.Dashboard;
 using NoteApp.Models.TextPage;
 using NoteApp.Views.Interfaces;
 using System.Diagnostics;
@@ -8,38 +9,28 @@ namespace NoteApp.Views;
 public partial class TextPageUpdate : ContentPage, TextPageViewInterface
 {
     private readonly TextPageController _controller;
-    private readonly int _noteId;
+    //private readonly int _noteId;
+    private NoteTextPOST noteText = new NoteTextPOST();
+    private ObjectDashBoard _noteId;
 
-    public TextPageUpdate(int noteId)
+    public TextPageUpdate(ObjectDashBoard id)
     {
         InitializeComponent();
-        _controller = new TextPageController(this);
-        _noteId = noteId;
 
-        // Cargar los datos de la nota al inicializar la vista.
-        LoadNoteForEdit();
+        _controller = new TextPageController(this);
+        _noteId = id;
+
+        noteText.id = id.id;
+        noteText.titulo = id.titulo;
+        noteText.descripcion = id.contenido;
+
     }
 
-    private async void LoadNoteForEdit()
+    protected override void OnAppearing()
     {
-        try
-        {
-            NoteTextPOST? note = await _controller.GetNoteForEdit(_noteId); 
-            if (note != null)
-            {
-                txtTitle.Text = note.titulo;
-                txtDescription.Text = note.descripcion;
-            }
-            else
-            {
-                await DisplayAlert("Error", "No se pudo cargar la nota seleccionada.", "OK");
-            }
-        }
-        catch (Exception ex)
-        {
-            Debug.WriteLine($"Error al cargar la nota: {ex.Message}");
-            await DisplayAlert("Error", "Ocurrió un problema al cargar los datos.", "OK");
-        }
+        base.OnAppearing();
+        txtTitle.Text = noteText.titulo;
+        txtDescription.Text = noteText.descripcion;
     }
 
     private async Task GetDataAndUpdateNote()
@@ -55,7 +46,7 @@ public partial class TextPageUpdate : ContentPage, TextPageViewInterface
                 descripcion = description
             };
 
-            await _controller.UpdateNote(_noteId, note); // Se actualiza la nota usando el controlador.
+            await _controller.UpdateNote(_noteId.id.Value, note); 
         }
         else
         {
@@ -71,7 +62,7 @@ public partial class TextPageUpdate : ContentPage, TextPageViewInterface
     public async Task UpdateNote(string msg)
     {
         await DisplayAlert("Resultado", msg, "OK");
-        await Navigation.PopAsync(); // Regresar a la pantalla anterior tras actualizar.
+        await Navigation.PopAsync(); 
     }
 
     public Task CreateNote(string msg)

@@ -14,7 +14,6 @@
              FontAttributes="Bold"
              HorizontalOptions="Center" />
 
-            <navbar:NavBar x:Name="navBar"></navbar:NavBar>
             <Entry x:Name="txtTitle" Text="Title" TextColor="Gray" FontSize="20" FontAttributes="Bold" />
             <Label Text="Description" TextColor="Gray" FontSize="18" Margin="0,30,0,0"  FontAttributes="Bold" />
             <Editor x:Name="txtDescription" Placeholder="Type your note here..." BackgroundColor="Transparent" TextColor="White" HeightRequest="280" />

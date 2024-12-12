@@ -1,4 +1,6 @@
+using Microsoft.Maui.Controls;
 using NoteApp.Models.Dashboard;
+using NoteApp.Models.TextPage;
 
 namespace NoteApp.Views.components.Dashboard;
 
@@ -19,15 +21,8 @@ public partial class NoteTextDashboard : ContentView
 		txtDescriptionText.Text = element.contenido;
 		lbCreationText.Text = element.fechaCreacion;
 	}
-    private void OnEditClicked(object sender, EventArgs e)
+    public async void OnEditClicked(object sender, EventArgs e)
     {
-        if (element?.id != null)
-        {
-            NoteClicked?.Invoke(this, element.id.Value);
-        }
-        else
-        {
-            Console.WriteLine("El ID del elemento no es válido.");
-        }
+        await Navigation.PushAsync(new TextPageUpdate(element));
     }
 }

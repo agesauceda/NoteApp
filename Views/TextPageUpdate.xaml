@@ -3,18 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="NoteApp.Views.TextPageUpdate"
              xmlns:navbar="clr-namespace:NoteApp.Views.components.Navbar"
-             Title="TextPage"
+             Title="TextPageUpdate"
              BackgroundColor="Black">
     <ScrollView>
         <VerticalStackLayout Padding="20">
-            <Label Text="Add Notes"
+            <Label Text="Update Notes"
              TextColor="White"
              FontSize="24"
              Margin="0,10,0,40"
              FontAttributes="Bold"
              HorizontalOptions="Center" />
 
-            <navbar:NavBar x:Name="navBar"></navbar:NavBar>
             <Entry x:Name="txtTitle" Text="Title" TextColor="Gray" FontSize="20" FontAttributes="Bold" />
             <Label Text="Description" TextColor="Gray" FontSize="18" Margin="0,30,0,0"  FontAttributes="Bold" />
             <Editor x:Name="txtDescription" Placeholder="Type your note here..." BackgroundColor="Transparent" TextColor="White" HeightRequest="280" />

@@ -1,5 +1,6 @@
 using NoteApp.Controllers.Dashboard;
 using NoteApp.Models.Dashboard;
+using NoteApp.Models.TextPage;
 using NoteApp.Views.components.Dashboard;
 using NoteApp.Views.Interfaces;
 
@@ -9,6 +10,7 @@ public partial class DashBoard : ContentPage, DashboardViewInterface
 {
     private readonly DashboardControllerInterface _controller;
     private List<ObjectDashBoard> _list = new List<ObjectDashBoard>();
+    private NoteTextPOST notasText;
 	public DashBoard()
 	{
 		InitializeComponent();
@@ -30,15 +32,16 @@ public partial class DashBoard : ContentPage, DashboardViewInterface
             for (int i = 0; i < list.Count; i++) {
                 switch (list[i].tipoNota) {
                     case "TEXTO":
-                        //DashboardContent.Add(new NoteTextDashboard(list[i]));
-                        var noteTextDashboard = new NoteTextDashboard(list[i]);
+                        DashboardContent.Add(new NoteTextDashboard(list[i]));
+                        //var noteTextDashboard = new NoteTextDashboard(list[i]);
 
-                        noteTextDashboard.NoteClicked += async (sender, noteId) =>
-                        {
-                            await Navigation.PushAsync(new TextPageUpdate(noteId));
-                        };
+                        //noteTextDashboard.NoteClicked += async (sender, noteId) =>
+                        //{
 
-                        DashboardContent.Add(noteTextDashboard);
+                        //    await Navigation.PushAsync(new TextPageUpdate(notasText.id,notasText.titulo,notasText.descripcion));
+                        //};
+
+                        //DashboardContent.Add(noteTextDashboard);
                         break;
                     case "IMAGEN":
                         DashboardContent.Add(new NoteImgDashboard(list[i]));

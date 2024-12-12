@@ -13,7 +13,7 @@
                     <SwipeItem 
                                  BackgroundColor="White" 
                                  IconImageSource="edit.png"
-                                 Invoked="OnEditClicked"/>
+                                 Clicked="OnEditClicked"/>
                 </SwipeItems>
             </SwipeView.RightItems>
 

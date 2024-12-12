@@ -45,11 +45,11 @@ namespace NoteApp.Controllers.NotePage
             }
         }
 
-        // Método para cargar los datos 
-        public async Task<NoteTextPOST?> GetNoteForEdit(int id)
-        {
-            return await _service.GetNoteForEdit(id); // Devuelve los datos de la nota.
-        }
+        //// método para cargar los datos 
+        //public async task<notetextpost?> getnoteforedit(int id)
+        //{
+        //    return await _service.getnoteforedit(id); // devuelve los datos de la nota.
+        //}
 
     }
 }

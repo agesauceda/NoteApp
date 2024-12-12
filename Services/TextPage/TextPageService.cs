@@ -32,19 +32,36 @@ namespace NoteApp.Services.NotePage
             }
         }
 
-        // Cargar los datos por Id
+        //// Cargar los datos por Id
+        //public async Task<NoteTextPOST?> GetNoteForEdit(int id)
+        //{
+        //    using (HttpResponseMessage response = await _client.GetAsync($"notasTexto/{id}"))
+        //    {
+        //        if (response.IsSuccessStatusCode)
+        //        {
+        //            var note = await response.Content.ReadFromJsonAsync<NoteTextPOST>();
+        //            return note;
+        //        }
+        //        return null; // si la nota es null
+        //    }
+        //}
+
         public async Task<NoteTextPOST?> GetNoteForEdit(int id)
         {
-            using (HttpResponseMessage response = await _client.GetAsync($"notasTexto/{id}"))
+            using (HttpResponseMessage response = await _client.GetAsync("notasTexto/"))
             {
                 if (response.IsSuccessStatusCode)
                 {
-                    var note = await response.Content.ReadFromJsonAsync<NoteTextPOST>();
-                    return note;
+                    var notes = await response.Content.ReadFromJsonAsync<List<NoteTextPOST>>();
+                    if (notes != null)
+                    {
+                        return notes.FirstOrDefault(note => note.id == id);
+                    }
                 }
-                return null; // si la nota es null
+                return null;
             }
         }
+
 
         // Actualizar una nota
         public async Task<ApiResponse> UpdateNote(int id, NoteTextPOST? note)

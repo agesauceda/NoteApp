@@ -18,14 +18,12 @@ namespace NoteApp.Controllers.EventPage
         {
             ApiResponseReminder response = await _service.InsertReminder(e);
 
-            string datos = response.data != null ? string.Join(", ", response.data.Select(r => r.ToString())) : "Sin datos";
-            await App.Current.MainPage.DisplayAlert(
-                "Respuesta del Servidor",
-                $"Estado: {(response.status.HasValue ? response.status.Value.ToString() : "Nulo")}\n" +
-                $"Mensaje: {response.message}\n" +
-                $"Datos: {datos}",
-                "OK"
-            );
+            Console.WriteLine("Insertando recordatorio:");
+            Console.WriteLine($"Título: {e.titulo}");
+            Console.WriteLine($"Descripción: {e.descripcion}");
+            Console.WriteLine($"Ubicación: {e.ubicacion}");
+            Console.WriteLine($"Fecha inicio: {e.fecha_inicio}");
+            Console.WriteLine($"Fecha final: {e.fecha_final}");
 
             if (response.status.Value)
             {

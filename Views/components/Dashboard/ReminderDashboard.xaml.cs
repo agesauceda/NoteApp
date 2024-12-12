@@ -9,6 +9,7 @@ public partial class ReminderDashboard : ContentView
 	{
 		InitializeComponent();
 		element = e;
+		 InitComponent(); 
 	}
 	private void InitComponent() {
 		lbTitleReminder.Text = element.titulo;

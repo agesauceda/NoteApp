@@ -34,16 +34,6 @@ public partial class EventPage : ContentPage, EventPageViewInterface
 		string hora_final = new DateTime(txtHoraFin.Time.Ticks).ToString("HH:mm:ss");
 		string hora_inicio = new DateTime(txtHoraIni.Time.Ticks).ToString("HH:mm:ss");
 
-		Console.WriteLine($"Título: {titulo}");
-		Console.WriteLine($"Descripción: {descripcion}");
-		Console.WriteLine($"Ubicación: {ubicacion}");
-		//Console.WriteLine($"Imagen: {imagen}");
-		Console.WriteLine($"Fecha inicio: {fecha_inicio}");
-		Console.WriteLine($"Fecha final: {fecha_final}");
-		Console.WriteLine($"Hora inicio: {hora_inicio}");
-		Console.WriteLine($"Hora final: {hora_final}");
-
-
         if(Validator.ValidateString(titulo) && Validator.ValidateString(descripcion) && Validator.ValidateString(ubicacion) 
             && Validator.ValidateString(fecha_inicio) && Validator.ValidateString(fecha_final))
         {
@@ -57,12 +47,14 @@ public partial class EventPage : ContentPage, EventPageViewInterface
                 fecha_final = fecha_final + " " + hora_final,
                
             };
+
+		
             await _controller.InsertReminder(e);
             flushData();
         }
         else
         {
-            await DisplayAlert("Error", "Datos incorrectos", "OK");
+            await DisplayAlert("Error", "Llene todos los campos", "OK");
         }
 		} catch(Exception e) {
 			await DisplayAlert("Excpcion", e.Message, "OK");

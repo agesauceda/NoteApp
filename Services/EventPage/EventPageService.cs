@@ -20,7 +20,7 @@ namespace NoteApp.Services.EventPage
                     return content;
                 }
             }
-            return new ApiResponseReminder { status = false, message = "Error al registrar usuario" };
+            return new ApiResponseReminder { status = false, message = "Error al registrar " };
         }
     }
 }

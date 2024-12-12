@@ -25,7 +25,6 @@ namespace NoteApp.Services.PhotoPage
             ApiResponse response = null;
             try
             {
-                Console.WriteLine("ID que se pasa: " + id);
                 using HttpResponseMessage res = await _client.DeleteAsync($"notasImg/img/{id}");
                 if(res.IsSuccessStatusCode)
                 {

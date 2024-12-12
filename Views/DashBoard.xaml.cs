@@ -2,13 +2,14 @@ using NoteApp.Controllers.Dashboard;
 using NoteApp.Models.Dashboard;
 using NoteApp.Views.components.Dashboard;
 using NoteApp.Views.Interfaces;
+using System.Collections.ObjectModel;
 
 namespace NoteApp.Views;
 
 public partial class DashBoard : ContentPage, DashboardViewInterface
 {
     private readonly DashboardControllerInterface _controller;
-    private List<ObjectDashBoard> _list = new List<ObjectDashBoard>();
+    private ObservableCollection<ObjectDashBoard> _list = new ObservableCollection<ObjectDashBoard>();
 	public DashBoard()
 	{
 		InitializeComponent();

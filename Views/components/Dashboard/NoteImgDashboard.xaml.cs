@@ -1,6 +1,7 @@
 using NoteApp.Models.common;
 using NoteApp.Models.Dashboard;
 using NoteApp.Services.PhotoPage;
+using System.Collections.ObjectModel;
 
 namespace NoteApp.Views.components.Dashboard;
 
@@ -8,11 +9,13 @@ public partial class NoteImgDashboard : ContentView
 {
 	public ObjectDashBoard element;
 	private PhotoPageDelete service;
-	public NoteImgDashboard(ObjectDashBoard e)
+	private ObservableCollection<ObjectDashBoard> _list;
+    public NoteImgDashboard(ObjectDashBoard e, ObservableCollection<ObjectDashBoard> items)
 	{
 		InitializeComponent();
         element = e;
         service = new PhotoPageDelete();
+        _list = items;
         InitComponent();
     }
 
@@ -29,6 +32,13 @@ public partial class NoteImgDashboard : ContentView
     public async void OnDeleteRegister(object sender, EventArgs args)
     {
 		ApiResponse response = await service.DeleteNoteImg(element.id.Value);
-		await Application.Current.MainPage.DisplayAlert("Eliminacíón de Nota", (response.status.Value) ? response.message : "No se pudo eliminar la nota", "Aceptar");
+		if (response.status.Value)
+		{
+			await Application.Current.MainPage.DisplayAlert("Eliminacíón de Nota", response.message, "Aceptar");
+			_list.Remove(element);
+		}
+		else { 
+			await Application.Current.MainPage.DisplayAlert("Eliminacíón de Nota", "Error al eliminar nota", "Aceptar");
+        }
     }
 }

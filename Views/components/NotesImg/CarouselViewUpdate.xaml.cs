@@ -33,16 +33,24 @@ public partial class CarouselViewUpdate : ContentView
             Console.WriteLine($"Source completo: {source}");
             string path = source.Split(" ")[1];
             var element = img.Where(x => x.path == path).Single();
-            ApiResponse response = await service.DeleteImg(element.id);
-            if (response.status.Value)
+            if (element.id != 0)
             {
-                img.Remove(element);
-                list.Remove(path);  
-                await Application.Current.MainPage.DisplayAlert("Eliminación de Imagen", response.message, "Aceptar");
+                ApiResponse response = await service.DeleteImg(element.id);
+                if (response.status.Value)
+                {
+                    img.Remove(element);
+                    list.Remove(path);
+                    await Application.Current.MainPage.DisplayAlert("Eliminación de Imagen", response.message, "Aceptar");
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Eliminación de Imagen", "Error al eliminar imagen", "Aceptar");
+                }
             }
-            else
-            {
-                await Application.Current.MainPage.DisplayAlert("Eliminación de Imagen", "Error al eliminar imagen", "Aceptar");
+            else {
+                await Application.Current.MainPage.DisplayAlert("Eliminación de Imagen", "Imagen Eliminada.", "Aceptar");
+                img.Remove(element);
+                list.Remove(path);
             }
         }
         catch (Exception ex)

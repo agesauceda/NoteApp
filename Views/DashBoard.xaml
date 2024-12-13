@@ -7,18 +7,30 @@
              Title="YOUR DASHBOARD">
 
     <Grid>
+
         <ScrollView>
             <VerticalStackLayout x:Name="DashboardContent" Padding="10">
 
             </VerticalStackLayout>
         </ScrollView>
 
-        <ImageButton Source="add.png"
+
+        <HorizontalStackLayout>
+            <ImageButton Source="add.png"
+                     HeightRequest="80"
+                     WidthRequest="80"
+                     BackgroundColor="Transparent"
+                     HorizontalOptions="End"
+                     VerticalOptions="End"
+                     Clicked="LogoutClicked"/>
+
+            <ImageButton Source="add.png"
                      HeightRequest="80"
                      WidthRequest="80"
                      BackgroundColor="Transparent"
                      HorizontalOptions="End"
                      VerticalOptions="End"
                      Clicked="OnAddNoteClicked"/>
+        </HorizontalStackLayout>
     </Grid>
 </ContentPage>

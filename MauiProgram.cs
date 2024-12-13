@@ -5,9 +5,10 @@ using Plugin.Firebase.Bundled.Shared;
 using Plugin.Firebase.Crashlytics;
 using Plugin.Firebase.Core;
 using NoteApp.Controllers.Auth;
-using Microsoft.Maui.Handlers;
 using CommunityToolkit.Maui;
+using Microsoft.Maui.Handlers;
 using Plugin.Maui.Audio;
+
 
 namespace NoteApp
 {
@@ -18,13 +19,17 @@ namespace NoteApp
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+
+                .UseMauiCommunityToolkit()
                 .UseMauiCommunityToolkitMediaElement()
+
                 .RegisterFirebaseServices()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                });
+                })
+                .UseMauiMaps();
 
             builder.Services.AddSingleton(s => ActivatorUtilities.CreateInstance<Client.Client>(s, "http://35.192.34.123:15000/api/v1/"));
             builder.Services.AddSingleton<QueueLogin>();

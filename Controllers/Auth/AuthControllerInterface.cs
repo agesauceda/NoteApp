@@ -2,6 +2,6 @@
 {
     public interface AuthControllerInterface
     {
-        void Login(string username, string password);
+        Task Login(string username, string password);
     }
 }

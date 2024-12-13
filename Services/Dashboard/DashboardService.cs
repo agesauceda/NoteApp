@@ -1,4 +1,5 @@
 ﻿using NoteApp.Models.Dashboard;
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
 
 namespace NoteApp.Services.Dashboard
@@ -14,6 +15,8 @@ namespace NoteApp.Services.Dashboard
         {
             try
             {
+                string token = Preferences.Get("token", "");
+                _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
                 return await _client.GetFromJsonAsync<ApiResponseDashboard>("dashboard/");
             }
             catch (Exception ex) { 

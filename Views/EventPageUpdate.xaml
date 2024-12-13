@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:maps="http://schemas.microsoft.com/dotnet/2021/maui/maps"
-             x:Class="NoteApp.Views.EventPage"
+             x:Class="NoteApp.Views.EventPageUpdate"
              xmlns:navbar="clr-namespace:NoteApp.Views.components.Navbar"
              Background="Black"
              Title="">
@@ -109,8 +109,8 @@
                                       VerticalOptions="FillAndExpand"
                                       MapClicked="OnMapClicked"/>
                         </Frame>
-                        
-                        
+
+
                     </HorizontalStackLayout>
                     <HorizontalStackLayout>
                         <Entry x:Name="txtUbicacion"
@@ -124,7 +124,7 @@
                     </HorizontalStackLayout>
 
                     <HorizontalStackLayout Spacing="10">
-                            <ImageButton Source="imagen.png"
+                        <ImageButton Source="imagen.png"
                                 Clicked="OnTakePhotoButtonClicked"
                                 HeightRequest="24"
                                 WidthRequest="24"
@@ -173,8 +173,8 @@
                 </VerticalStackLayout>
             </Frame>
 
-            <Button Text="Save Note"
-                    Clicked="OnGuardarEvento_Clicked"
+            <Button Text="Update Note"
+                    Clicked="OnActualizarEvento_Clicked"
                     BackgroundColor="#3D5AFE"
                     TextColor="White"
                     CornerRadius="8"

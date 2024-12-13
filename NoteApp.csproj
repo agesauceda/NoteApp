@@ -50,7 +50,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiImage Remove="Resources\Images\noimage.jpg" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <None Remove="Platforms\Android\Resources\values\strings.xml" />
+	  <None Remove="Resources\Images\noimage.jpg" />
 	</ItemGroup>
 
 	<ItemGroup>

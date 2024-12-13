@@ -34,12 +34,6 @@ public partial class EventPageUpdate : ContentPage, EventPageViewInterface
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        //txtTitulo.Text = obj.titulo;
-        //txtDescripcion.Text = obj.contenido;
-        //txtFechaIni.Date = DateTime.Parse(obj.fechaInicio);
-        //txtFechaFin.Date = DateTime.Parse(obj.fechaFinal);
-        //fotoBase64 = obj.imagen;
-        //txtHoraIni.Time = DateTime.Parse(obj.fechaInicio, null, System.Globalization.DateTimeStyles.RoundtripKind).TimeOfDay;
         await _controller.GetReminder(obj.id.Value);
         await RequestPermissions.SolicitarPermisosUbicacion();
     }
@@ -74,6 +68,8 @@ public partial class EventPageUpdate : ContentPage, EventPageViewInterface
                 if (string.IsNullOrEmpty(this.fotoBase64))
                 {
                     await DisplayAlert("Error", "No se ha cargado ninguna imagen.", "OK");
+
+
                 }
                 else
                 {
@@ -143,37 +139,31 @@ public partial class EventPageUpdate : ContentPage, EventPageViewInterface
     {
         try
         {
-            var res = await RequestPermissions.CheckPermissionCameraAsync();
-            if (res != null)
+            var foto = await MediaPicker.CapturePhotoAsync();
+
+            if (foto != null)
             {
-                var foto = await MediaPicker.CapturePhotoAsync();
+                var filePath = foto.FullPath;
+                var fotoBase64 = await Converters.ConvertToBase64(filePath);
 
-                if (foto != null)
+                if (!string.IsNullOrEmpty(fotoBase64))
                 {
-                    using (var stream = await foto.OpenReadAsync())
-                    {
-                        using (var memoryStream = new MemoryStream())
-                        {
-                            await stream.CopyToAsync(memoryStream);
-                            byte[] fotoBytes = memoryStream.ToArray();
+                    this.fotoBase64 = fotoBase64;
+                    var imageSource = ImageSource.FromFile(filePath);
+                    imgPreview.Source = imageSource;
 
-                            string fotoBase64 = Convert.ToBase64String(fotoBytes);
-
-                            this.fotoBase64 = fotoBase64;
-                            var imageSource = ImageSource.FromStream(() => new MemoryStream(fotoBytes));
-                            imgPreview.Source = imageSource;
-                            await DisplayAlert("Success", "Foto tomada correctamente", "OK");
-                        }
-                    }
+                    await DisplayAlert("Success", "Foto tomada correctamente", "OK");
+                }
+                else
+                {
+                    await DisplayAlert("Error", "No se pudo convertir la imagen a Base64", "OK");
                 }
             }
         }
-
         catch (Exception ex)
         {
             await Application.Current.MainPage.DisplayAlert("Error", $"No se pudo capturar la foto: {ex.Message}", "OK");
         }
-
     }
 
     public Task InsertReminder(string msg)
@@ -190,7 +180,6 @@ public partial class EventPageUpdate : ContentPage, EventPageViewInterface
     {
         if (reminder != null)
         {
-            // Poblar los campos con los datos obtenidos
             txtTitulo.Text = reminder.titulo;
             txtDescripcion.Text = reminder.descripcion;
             txtUbicacion.Text = reminder.ubicacion ?? string.Empty;
@@ -216,12 +205,13 @@ public partial class EventPageUpdate : ContentPage, EventPageViewInterface
             txtHoraIni.Time = DateTime.Parse(reminder.fecha_inicio).TimeOfDay;
             txtHoraFin.Time = DateTime.Parse(reminder.fecha_final).TimeOfDay;
 
-            // Decodificar imagen en base64 (si existe)
             if (!string.IsNullOrEmpty(reminder.imagen))
             {
                 try
                 {
-                    byte[] imageBytes = Convert.FromBase64String(reminder.imagen); imgPreview.Source = ImageSource.FromStream(() => new MemoryStream(imageBytes)); fotoBase64 = reminder.imagen; // Guardar la imagen actual
+                    byte[] imageBytes = Convert.FromBase64String(reminder.imagen);
+                    imgPreview.Source = ImageSource.FromStream(() => new MemoryStream(imageBytes));
+                    fotoBase64 = reminder.imagen; 
                 }
                 catch (FormatException ex)
                 {       

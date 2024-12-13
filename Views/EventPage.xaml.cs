@@ -29,9 +29,28 @@ public partial class EventPage : ContentPage, EventPageViewInterface
     }
 
 
+    private async Task SetDefaultImageBase64()
+    {
+        try
+        {
+            var stream = await FileSystem.OpenAppPackageFileAsync("noimage.jpg");
+
+            using (var memoryStream = new MemoryStream())
+            {
+                await stream.CopyToAsync(memoryStream);
+                byte[] defaultImageBytes = memoryStream.ToArray();
+                this.fotoBase64 = Convert.ToBase64String(defaultImageBytes);
+                imgPreview.Source = ImageSource.FromStream(() => new MemoryStream(defaultImageBytes));
+            }
+        }
+        catch (Exception ex)
+        {
+           // await DisplayAlert("Error", $"No se pudo cargar la imagen predeterminada: {ex.Message}", "OK");
+        }
+    }
+
     private async Task getData()
     {
-
         try
         {
             string titulo = txtTitulo.Text;
@@ -42,29 +61,39 @@ public partial class EventPage : ContentPage, EventPageViewInterface
             string hora_final = new DateTime(txtHoraFin.Time.Ticks).ToString("HH:mm:ss");
             string hora_inicio = new DateTime(txtHoraIni.Time.Ticks).ToString("HH:mm:ss");
 
-            if (Validator.ValidateString(titulo) && Validator.ValidateString(descripcion) 
+            if (Validator.ValidateString(titulo) && Validator.ValidateString(descripcion)
                 && Validator.ValidateString(fecha_inicio) && Validator.ValidateString(fecha_final))
             {
+                if (string.IsNullOrEmpty(ubicacion))
+                {
+                    await DisplayAlert("Error", "La ubicación no puede estar vacía.", "OK");
+                    return;  
+                }
+
+                if (string.IsNullOrEmpty(this.fotoBase64))
+                {
+                    await SetDefaultImageBase64();
+                }
+
                 e = new ReminderPOST
                 {
                     titulo = titulo,
                     descripcion = descripcion,
-                    ubicacion = string.IsNullOrEmpty(ubicacion) ? null : ubicacion,
-                    imagen = string.IsNullOrEmpty(this.fotoBase64) ? null : this.fotoBase64,
+                    ubicacion = ubicacion,  
+                    imagen = this.fotoBase64,
                     fecha_inicio = fecha_inicio + " " + hora_inicio,
                     fecha_final = fecha_final + " " + hora_final,
-
                 };
 
                 if (string.IsNullOrEmpty(this.fotoBase64))
                 {
-                    await DisplayAlert("Error", "No se ha cargado ninguna imagen.", "OK");
+                    await DisplayAlert("Recordatorio", "No se ha cargado ninguna imagen.", "OK");
                 }
                 else
                 {
-                    Console.WriteLine("Base64 Enviado: " + this.fotoBase64.Substring(0, 100)); 
-
+                    Console.WriteLine("Base64 Enviado: " + this.fotoBase64.Substring(0, 100));
                 }
+
                 await _controller.InsertReminder(e);
                 flushData();
             }
@@ -73,11 +102,12 @@ public partial class EventPage : ContentPage, EventPageViewInterface
                 await DisplayAlert("Error", "Llene todos los campos", "OK");
             }
         }
-        catch (Exception e)
+        catch (Exception ex)
         {
-            await DisplayAlert("Excepcion", e.Message, "OK");
+            await DisplayAlert("Excepción", ex.Message, "OK");
         }
     }
+
     private void flushData()
     {
         e = null;
@@ -111,38 +141,33 @@ public partial class EventPage : ContentPage, EventPageViewInterface
     {
         try
         {
-            var res = await RequestPermissions.CheckPermissionCameraAsync();
-            if (res != null)
+            var foto = await MediaPicker.CapturePhotoAsync();
+
+            if (foto != null)
             {
-                var foto = await MediaPicker.CapturePhotoAsync();
+                var filePath = foto.FullPath;
+                var fotoBase64 = await Converters.ConvertToBase64(filePath);
 
-                if (foto != null)
+                if (!string.IsNullOrEmpty(fotoBase64))
                 {
-                    using (var stream = await foto.OpenReadAsync())
-                    {
-                        using (var memoryStream = new MemoryStream())
-                        {
-                            await stream.CopyToAsync(memoryStream);
-                            byte[] fotoBytes = memoryStream.ToArray();
+                    this.fotoBase64 = fotoBase64;
+                    var imageSource = ImageSource.FromFile(filePath);
+                    imgPreview.Source = imageSource;
 
-                            string fotoBase64 = Convert.ToBase64String(fotoBytes);
-
-                            this.fotoBase64 = fotoBase64;
-                            var imageSource = ImageSource.FromStream(() => new MemoryStream(fotoBytes));
-                            imgPreview.Source = imageSource;
-                            await DisplayAlert("Success", "Foto tomada correctamente", "OK");
-                        }
-                    }
+                    await DisplayAlert("Success", "Foto tomada correctamente", "OK");
+                }
+                else
+                {
+                    await DisplayAlert("Error", "No se pudo convertir la imagen a Base64", "OK");
                 }
             }
         }
-
         catch (Exception ex)
         {
             await Application.Current.MainPage.DisplayAlert("Error", $"No se pudo capturar la foto: {ex.Message}", "OK");
         }
-             
     }
+
 
     public async Task UpdateReminder(ReminderPUT reminder)
     {

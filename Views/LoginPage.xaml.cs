@@ -20,23 +20,25 @@ public partial class LoginPage : ContentPage, AuthViewInterface
     {
 		base.OnAppearing();
         await RequestPermissions.CheckPermissionNotification();
-        await isLogin();
+		string token = Preferences.Get("token", "");
+		if (!String.IsNullOrEmpty(token)) { 
+			await isLogin();
+		} 
     }
 
     private async void LoginButton_Clicked(object sender, EventArgs e)
     {
 		await SendData();
-		await Login();
-		await isLogin();
+        await Login();
     }
-	private async Task isLogin() {
+    private async Task isLogin() {
 		if (await App._queueLogin.ValidateInitialSession()) {
             await Navigation.PushAsync(new DashBoard());
         }
 	}
 	public async Task Login() {
 		string token = Preferences.Get("token", "");
-		if (Validator.ValidateString(token)) {
+        if (Validator.ValidateString(token)) {
 			await Navigation.PushAsync(new DashBoard());
 		}
     }
@@ -44,7 +46,7 @@ public partial class LoginPage : ContentPage, AuthViewInterface
 		string user = txtUsername.Text;
 		string pass = txtPassword.Text;
 		if (!String.IsNullOrEmpty(user) && !String.IsNullOrWhiteSpace(user) && !String.IsNullOrEmpty(pass) && !String.IsNullOrWhiteSpace(pass) ) { 
-            _controller.Login(user, pass);
+            await _controller.Login(user, pass);
 		}
 		else
 		{

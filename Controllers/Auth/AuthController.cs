@@ -10,7 +10,7 @@
             this._service = new Services.Auth.AuthService(_client);
         }
 
-        public async void Login(string username, string password) {
+        public async Task Login(string username, string password) {
             Models.Auth.Auth e = await _service.Login(username, password);
             if (e != null)
             {

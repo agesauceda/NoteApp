@@ -102,4 +102,10 @@ public partial class DashBoard : ContentPage, DashboardViewInterface
     {
         await Navigation.PushAsync(new TextPage());
     }
+
+    private async void LogoutClicked(object sender, EventArgs e)
+    {
+        Preferences.Clear();
+        await Navigation.PushAsync(new LoginPage());
+    }
 }

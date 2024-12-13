@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="NoteApp.Views.TextPage"
+             x:Class="NoteApp.Views.TextPageUpdate"
              xmlns:navbar="clr-namespace:NoteApp.Views.components.Navbar"
-             Title="TextPage"
+             Title="TextPageUpdate"
              BackgroundColor="Black">
     <ScrollView>
         <VerticalStackLayout Padding="20">
-            <Label Text="Add Notes"
+            <Label Text="Update Notes"
              TextColor="White"
              FontSize="24"
              Margin="0,10,0,40"
              FontAttributes="Bold"
              HorizontalOptions="Center" />
 
-            <navbar:NavBar x:Name="navBar"></navbar:NavBar>
-
-            <Entry x:Name="txtTitle" Placeholder="Title" TextColor="Gray" FontSize="20" FontAttributes="Bold" />
+            <Entry x:Name="txtTitle" Text="Title" TextColor="Gray" FontSize="20" FontAttributes="Bold" />
             <Label Text="Description" TextColor="Gray" FontSize="18" Margin="0,30,0,0"  FontAttributes="Bold" />
             <Editor x:Name="txtDescription" Placeholder="Type your note here..." BackgroundColor="Transparent" TextColor="White" HeightRequest="280" />
 
@@ -24,7 +22,7 @@
 
             </HorizontalStackLayout>
 
-            <Button Text="Save Note" BackgroundColor="#3D5AFE" TextColor="White" CornerRadius="8" Margin="10" Clicked="SaveNoteButton_Clicked"/>
+            <Button Text="Save Note" BackgroundColor="#3D5AFE" TextColor="White" CornerRadius="8" Margin="10" Clicked="UpdateButton_Clicked"/>
         </VerticalStackLayout>
     </ScrollView>
-</ContentPage>
+    </ContentPage>

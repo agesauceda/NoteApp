@@ -9,10 +9,12 @@
                 <SwipeItems Mode="Reveal">
                   <SwipeItem 
                                  BackgroundColor="White" 
-                                 IconImageSource="delete.png"/>
+                                 IconImageSource="delete.png"
+                                 Clicked="DeleteReminder" />
                     <SwipeItem 
                                  BackgroundColor="White" 
-                                 IconImageSource="edit.png" />
+                                 IconImageSource="edit.png"
+                                 Clicked="EditReminder" />
                 </SwipeItems>
             </SwipeView.RightItems>
 

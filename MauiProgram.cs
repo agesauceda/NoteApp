@@ -9,6 +9,7 @@ using CommunityToolkit.Maui;
 using Microsoft.Maui.Handlers;
 using Plugin.Maui.Audio;
 
+
 namespace NoteApp
 {
     public static class MauiProgram
@@ -18,7 +19,10 @@ namespace NoteApp
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+
+                .UseMauiCommunityToolkit()
                 .UseMauiCommunityToolkitMediaElement()
+
                 .RegisterFirebaseServices()
                 .ConfigureFonts(fonts =>
                 {

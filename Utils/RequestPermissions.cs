@@ -32,6 +32,21 @@
             }
         }
 
+        public static async Task<PermissionStatus> SolicitarPermisosUbicacion()
+        {
+            var status = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
+
+            if (status != PermissionStatus.Granted)
+            {
+                if (Permissions.ShouldShowRationale<Permissions.LocationWhenInUse>())
+                {
+                    await App.Current.MainPage.DisplayAlert("Permisos necesarios", "Se necesitan permisos para mostrar el mapa.", "OK");
+                }
+                status = await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
+            }
+
+            return status;
+        }
 
         public static async Task<string?> CheckPermissionCameraAsync()
         {

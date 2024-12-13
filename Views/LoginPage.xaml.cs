@@ -27,6 +27,7 @@ public partial class LoginPage : ContentPage, AuthViewInterface
     {
 		await SendData();
 		await Login();
+		await isLogin();
     }
 	private async Task isLogin() {
 		if (await App._queueLogin.ValidateInitialSession()) {

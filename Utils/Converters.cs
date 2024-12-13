@@ -18,6 +18,25 @@
             }
             return base64;
         }
+
+        public static async Task<string?> ConvertAudioToBase64(string path)
+        {
+            byte[] audioBytes;
+            string base64 = null;
+            try
+            {
+                if (File.Exists(path))
+                {
+                    audioBytes = await File.ReadAllBytesAsync(path);
+                    base64 = Convert.ToBase64String(audioBytes);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: " + e.Message);
+            }
+            return base64;
+        }
         public static async Task<string> ConvertBase64ToFile(string base64, int id)
         {
             string path = null;

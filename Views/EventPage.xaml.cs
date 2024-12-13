@@ -3,11 +3,14 @@ using NoteApp.Models.EventPage;
 using NoteApp.Views.Interfaces;
 using NoteApp.Utils;
 using CommunityToolkit.Maui.Media;
+using Microsoft.Maui.Controls.Maps;
 
 namespace NoteApp.Views;
 
 public partial class EventPage : ContentPage, EventPageViewInterface
 {
+    private Pin pinLocation = null;
+    private Location location;
     private EventPageController _controller;
     private ReminderPOST e;
     string fotoBase64;
@@ -21,6 +24,7 @@ public partial class EventPage : ContentPage, EventPageViewInterface
     protected override async void OnAppearing()
     {
         base.OnAppearing();
+        await RequestPermissions.SolicitarPermisosUbicacion();
     }
 
 
@@ -137,11 +141,26 @@ public partial class EventPage : ContentPage, EventPageViewInterface
 
     public async Task UpdateReminder(ReminderPUT reminder)
     {
-        await DisplayAlert("Actualizaci�n de Evento", "aasdfasdf", "Aceptar");
+        await DisplayAlert("Actualizacion de Evento", "aasdfasdf", "Aceptar");
     }
 
     public Task GetReminder(ReminderGET? reminder)
     {
         throw new NotImplementedException();
+    }
+
+    private void OnMapClicked(object sender, MapClickedEventArgs e) {
+        location = e.Location;
+        if (pinLocation != null) {
+            MapLoc.Pins.Remove(pinLocation);
+        }
+        pinLocation = new Pin()
+        {
+            Label = "Lugar Seleccionado",
+            Type = PinType.Place,
+            Location = location
+        };
+        MapLoc.Pins.Add(pinLocation);
+
     }
 }

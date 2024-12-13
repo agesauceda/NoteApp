@@ -15,6 +15,7 @@ public partial class CarouselViewUpdate : ContentView
         InitializeComponent();
         list = new ObservableCollection<string>();
         img = new ObservableCollection<ImgList>();
+        service = new PhotoPageDelete();
         Carrousel.ItemsSource = list;
     }
 
@@ -31,12 +32,12 @@ public partial class CarouselViewUpdate : ContentView
             var source = obj.Source.ToString();
             Console.WriteLine($"Source completo: {source}");
             string path = source.Split(" ")[1];
-            ImgList element = img.Where(x => x.path == path).Single();
+            var element = img.Where(x => x.path == path).Single();
             ApiResponse response = await service.DeleteImg(element.id);
             if (response.status.Value)
             {
                 img.Remove(element);
-                list.Remove(path);
+                list.Remove(path);  
                 await Application.Current.MainPage.DisplayAlert("Eliminación de Imagen", response.message, "Aceptar");
             }
             else

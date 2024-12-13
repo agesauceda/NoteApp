@@ -1,6 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-	<application android:allowBackup="true" android:icon="@mipmap/appicon" android:supportsRtl="true" android:usesCleartextTraffic="true">
+	<application 
+		android:allowBackup="true" 
+		android:icon="@mipmap/appicon" 
+		android:roundIcon="@mipmap/appicon_round"
+		android:supportsRtl="true"
+		android:usesCleartextTraffic="true">
+		
+		<meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyDD7DuZWopDvqZi6Oj0pKRvBXVUgmrd1os" />
 		<receiver android:name="com.google.firebase.iid.FirebaseInstanceIdInternalReceiver" android:exported="false" />
 		<receiver android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver" android:exported="true" android:permission="com.google.android.c2dm.permission.SEND">
 			<intent-filter>
@@ -9,6 +16,19 @@
 				<category android:name="${applicationId}" />
 			</intent-filter>
 		</receiver>
+
+		<service
+            android:name="communityToolkit.maui.media.services"
+            android:exported="false"
+            android:enabled="true"
+            android:foregroundServiceType="mediaPlayback">
+			<intent-filter>
+				<action android:name="android.intent.action.MEDIA_BUTTON" />
+			</intent-filter>
+			<intent-filter>
+				<action android:name="androidx.media3.session.MediaSessionService"/>
+			</intent-filter>
+		</service>
 	</application>
 		<queries>
 			<intent>
@@ -19,9 +39,20 @@
 	<uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+	<uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
+	<uses-permission android:name="android.permission.MEDIA_CONTENT_CONTROL" />
+	<uses-permission android:name="android.permission.CAMERA" />
+	<uses-permission android:name="android.permission.RECORD_AUDIO" />
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+	<uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
+	<uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 	<uses-permission android:name="android.permission.CAMERA" />
 	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 	<uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
 	<uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 </manifest>

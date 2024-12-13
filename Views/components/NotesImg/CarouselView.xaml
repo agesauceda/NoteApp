@@ -15,7 +15,7 @@
                FontSize="18" 
                FontAttributes="Bold" />
 
-            <CarouselView x:Name="Carrousel" HeightRequest="100" 
+            <CarouselView x:Name="Carrousel" HeightRequest="100" Margin="0,1,0,0"
                       IndicatorView="carouselIndicator">
                 <CarouselView.ItemTemplate>
                     <DataTemplate x:Name="ContentImages">
@@ -33,7 +33,7 @@
             </CarouselView>
 
             <IndicatorView x:Name="carouselIndicator" 
-                       IndicatorColor="Gray" 
+                       IndicatorColor="#3D5AFE" 
                        SelectedIndicatorColor="White" 
                        HorizontalOptions="Center" />
         </VerticalStackLayout>

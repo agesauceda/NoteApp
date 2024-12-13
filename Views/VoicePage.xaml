@@ -3,83 +3,48 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:navbar="clr-namespace:NoteApp.Views.components.Navbar"
+             xmlns:carousel="clr-namespace:NoteApp.Views.components.NotesVoice"
              x:Class="NoteApp.Views.VoicePage"
-             Title="VoicePage"
-             BackgroundColor="Black">
+             Title="">
 
-    <ScrollView>
-        <VerticalStackLayout Padding="20">
-            <Label Text="Notes"
-                   TextColor="White"
-                   FontSize="24"
-                   Margin="0,10,0,40"
-                   FontAttributes="Bold"
-                   HorizontalOptions="Center" />
 
-            <navbar:NavBar></navbar:NavBar>
+    <VerticalStackLayout Padding="20,0,20,20">
+        <Grid ColumnDefinitions="*,Auto" Margin="0,0,0,20">
+            <Label Text="Voice Notes"
+               TextColor="White"
+               FontSize="24"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"
+               Grid.Column="0" />
 
-            <Entry x:Name="txtTitle" Text="Title" TextColor="Gray" FontSize="20" FontAttributes="Bold" />
+            <ImageButton Source="mic.png" 
+                     WidthRequest="30" 
+                     HeightRequest="30" 
+                     HorizontalOptions="End" 
+                     VerticalOptions="Center"
+                     Grid.Column="1" 
+                     Clicked="OnRecordAudioClicked" />
+        </Grid>
 
-            <Label Text="Description" TextColor="Gray" FontSize="18" Margin="0,30,0,0" FontAttributes="Bold" />
-            <Editor x:Name="txtDescription" Placeholder="Type your note here..." BackgroundColor="Transparent" TextColor="White" HeightRequest="100" />
+        <navbar:NavBar></navbar:NavBar>
 
-            <Frame Margin="0,10,0,0"
+        <Frame Margin="0,10,0,20"
                    Padding="10"
-                   BackgroundColor="#303030"
+                   BackgroundColor="#202020"
                    CornerRadius="12"
                    BorderColor="White">
-                <VerticalStackLayout Spacing="10">
+            <VerticalStackLayout Spacing="10">
+                <Entry x:Name="txtTitle" Placeholder="Title" TextColor="White" FontSize="20" FontAttributes="Bold" />
+                <Label Text="Description" TextColor="Gray" FontSize="18" Margin="0,30,0,0" FontAttributes="Bold" />
+                <Editor x:Name="txtDescription" Placeholder="Type your note here..." BackgroundColor="Transparent" TextColor="White" HeightRequest="100" />
+                <carousel:CarouselAudio x:Name="CarouselObject"/>
+            </VerticalStackLayout>
+        </Frame>
 
-                    <Label Text="Audios" 
-                           TextColor="Gray" 
-                           FontSize="18" 
-                           FontAttributes="Bold" />
-
-                    <CarouselView x:Name="audioCarousel" HeightRequest="100" Margin="0,1,0,0" IndicatorView="audioIndicator">
-                        <CarouselView.ItemsSource>
-                            <x:Array Type="{x:Type x:String}" />
-                        </CarouselView.ItemsSource>
-                        <CarouselView.ItemTemplate>
-                            <DataTemplate>
-                                <VerticalStackLayout>
-                                    <toolkit:MediaElement
-                                        HeightRequest="100"
-                                        WidthRequest="300"
-                                        ShouldShowPlaybackControls="True"
-                                        ShouldAutoPlay="False"
-                                        Aspect="AspectFill"
-                                        Source="{Binding .}" />
-                                </VerticalStackLayout>
-                            </DataTemplate>
-                        </CarouselView.ItemTemplate>
-                    </CarouselView>
-
-                    <IndicatorView x:Name="audioIndicator"
-                                   HorizontalOptions="Center"
-                                   IndicatorColor="Gray"
-                                   SelectedIndicatorColor="White" />
-                </VerticalStackLayout>
-            </Frame>
-
-            <Frame CornerRadius="10" Padding="10" Margin="0,10" HasShadow="True" BackgroundColor="White">
-                <VerticalStackLayout Spacing="10">
-                    <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
-                        <Button Text="🎤 Grabar Audio"
-                                Clicked="OnRecordAudioClicked"
-                                BackgroundColor="#007aff"
-                                TextColor="White"
-                                CornerRadius="10" />
-                    </HorizontalStackLayout>
-                </VerticalStackLayout>
-            </Frame>
-
-            <Button Text="Save Note"
+        <Button Text="Save"
                     BackgroundColor="#3D5AFE"
                     TextColor="White"
                     CornerRadius="8"
-                    Margin="10,90,10,0"
                     Clicked="OnSaveNoteClicked" />
-        </VerticalStackLayout>
-    </ScrollView>
-
+    </VerticalStackLayout>
 </ContentPage>

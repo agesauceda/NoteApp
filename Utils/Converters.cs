@@ -52,5 +52,22 @@
             }
             return path;
         }
+
+        public static async Task<string> ConvertBase64ToFileAudio(string base64, int id)
+        {
+            string path = null;
+            try
+            {
+                byte[] filyArr = Convert.FromBase64String(base64);
+                string local = Path.Combine(FileSystem.AppDataDirectory, $"audio_{id}.mp4");
+                await File.WriteAllBytesAsync(local, filyArr);
+                path = local;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return path;
+        }
     }
 }

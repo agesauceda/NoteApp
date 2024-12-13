@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="NoteApp.Views.components.NotesVoice.CarouselAudioUpdate">
+
+    <Frame Margin="0,10,0,0"
+       Padding="10"
+       BackgroundColor="#303030"
+       CornerRadius="12"
+       BorderColor="White">
+
+        <VerticalStackLayout Spacing="10">
+            <Label Text="Audio Gallery" 
+               TextColor="Gray" 
+               FontSize="18" 
+               FontAttributes="Bold" />
+
+            <CarouselView x:Name="audioCarousel" HeightRequest="100" Margin="0,1,0,0" IndicatorView="audioIndicator">
+                <CarouselView.ItemTemplate>
+                    <DataTemplate x:Name="ContentAudio">
+                        <Grid>
+                            <toolkit:MediaElement
+                                HeightRequest="500"
+                                WidthRequest="300"
+                                ShouldShowPlaybackControls="True"
+                                ShouldAutoPlay="False"
+                                Aspect="AspectFill"
+                                Source="{Binding .}">
+                            </toolkit:MediaElement>
+
+                            <Button
+                                Text="Eliminar"
+                                BackgroundColor="Transparent"
+                                TextColor="Transparent"
+                                BorderColor="Transparent"
+                                HorizontalOptions="End"
+                                VerticalOptions="Start"
+                                Padding="0"
+                                CommandParameter="{Binding .}"
+                                Clicked="OnDeleteButtonClicked"
+                                Margin="0,10,10,0"/>
+                        </Grid>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+
+            <IndicatorView x:Name="audioIndicator"
+           HorizontalOptions="Center"
+           IndicatorColor="#3D5AFE"
+           SelectedIndicatorColor="White" />
+        </VerticalStackLayout>
+    </Frame>
+</ContentView>

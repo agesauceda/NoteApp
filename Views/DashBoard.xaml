@@ -4,7 +4,7 @@
              x:Class="NoteApp.Views.DashBoard"
              xmlns:tabbar="clr-namespace:NoteApp.Views.components.Navbar"
              xmlns:dashboard="clr-namespace:NoteApp.Views.components.Dashboard"
-             Title="DashBoard">
+             Title="YOUR DASHBOARD">
 
     <Grid>
         <ScrollView>

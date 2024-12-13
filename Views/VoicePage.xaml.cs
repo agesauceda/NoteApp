@@ -16,7 +16,7 @@ public partial class VoicePage : ContentPage, VoicePageViewInterface
 {
     private readonly VoicePageController _controller;
     private NoteVoicePOST _voicePost;
-    private List<string> _audioBase64List = new List<string>();
+    private List<string> _audios;
 
     private string AudioBase;
     private int _maxAudios = 3; 
@@ -29,7 +29,8 @@ public partial class VoicePage : ContentPage, VoicePageViewInterface
     public VoicePage()
 	{
 		InitializeComponent();
-        this._controller = new VoicePageController((VoicePageViewInterface)this);
+        _audios = new List<string>();
+        _controller = new VoicePageController((VoicePageViewInterface)this);
 	}
 
     protected override async void OnAppearing()
@@ -76,11 +77,12 @@ public partial class VoicePage : ContentPage, VoicePageViewInterface
 
             if (audioBase64 != null)
             {
-                if (_audioBase64List.Count < _maxAudios)
+                if (_audios.Count < _maxAudios)
                 {
-                    _audioBase64List.Add(audioBase64);
+                    string tempAudioFilePath = await ConvertBase64ToTempFile(audioBase64);
+
+                    CarouselObject.AddAudio(tempAudioFilePath);
                     await DisplayAlert("Grabación", "Audio agregado correctamente.", "OK");
-                    UpdateAudioCarousel();
                 }
                 else
                 {
@@ -107,49 +109,54 @@ public partial class VoicePage : ContentPage, VoicePageViewInterface
     #else
     #endif
     }
-
-    private void UpdateAudioCarousel()
+    private async Task<string> ConvertBase64ToTempFile(string base64Audio)
     {
-        audioCarousel.ItemsSource = _audioBase64List
-            .Select(audioBase64 => $"data:audio/mp4;base64,{audioBase64}")
-            .ToList();
+        string tempPath = Path.Combine(FileSystem.CacheDirectory, $"audio_{Guid.NewGuid()}.mp4");
+        byte[] audioBytes = Convert.FromBase64String(base64Audio);
+        await File.WriteAllBytesAsync(tempPath, audioBytes);
+        return tempPath;
     }
 
     private async void OnSaveNoteClicked(object sender, EventArgs e)
     {
         if (Validator.ValidateString(txtTitle.Text) && Validator.ValidateString(txtDescription.Text))
         {
+            var list = CarouselObject.GetAudios();
+            for (int i = 0; i < list.Count; i++)
+            {
+                _audios.Add(Converters.ConvertToBase64(list[i]).Result);
+            }
+            _voicePost = new NoteVoicePOST
+            {
+                titulo = txtTitle.Text,
+                descripcion = txtDescription.Text,
+                audio = _audios
+            };
+            await _controller.RegisterNoteVoice( _voicePost );
+            flushData();
         }
-
-        if (_audioBase64List.Count == 0)
-        {
-            await DisplayAlert("Error", "Debes grabar al menos un audio antes de guardar.", "OK");
-            return;
-        }
-
-        var note = new NoteVoicePOST
-        {
-            titulo = txtTitle.Text, 
-            descripcion = txtDescription.Text,
-            audio = _audioBase64List
-        };
-
-        Console.WriteLine("Título: " + note.titulo);
-        Console.WriteLine("Descripción: " + note.descripcion);
-        Console.WriteLine("Audios en Base64:");
-        foreach (var audio in note.audio)
-        {
-            Console.WriteLine(audio);
-        }
-
-        await _controller.RegisterNoteVoice(note);
-        await DisplayAlert("Éxito", "Nota de voz guardada correctamente.", "OK");
-        _audioBase64List.Clear();
-        UpdateAudioCarousel();
+    }
+    private void flushData()
+    {
+        _voicePost = new NoteVoicePOST();
+        txtDescription.Text = "";
+        txtTitle.Text = "";
+        _audios.Clear();
+        CarouselObject.ClearAudios();
     }
 
     public async Task RegisterNoteVoice(string msg)
     {
         await DisplayAlert("Registro de Nota", msg, "Aceptar");
+    }
+
+    public Task GetAudio(List<AudiosNoteGET> voices)
+    {
+        return Task.CompletedTask;
+    }
+
+    public Task UpdateNoteVoice(string msg)
+    {
+        return Task.CompletedTask;
     }
 }

@@ -2,19 +2,27 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="NoteApp.Views.PhotoPageUpdate"
              xmlns:carousel="clr-namespace:NoteApp.Views.components.NotesImg"
-             Title=""
-             Background="Black">
+             Title="">
 
-    <ScrollView>
-        <VerticalStackLayout Padding="20">
-            <Label Text="Notes"
-                   TextColor="White"
-                   FontSize="24"
-                   Margin="0,10,0,10"
-                   FontAttributes="Bold"
-                   HorizontalOptions="Center" />
+    <VerticalStackLayout Padding="20,0,20,20">
+        <Grid ColumnDefinitions="*,Auto" Margin="0,0,0,20">
+            <Label Text="Photo Notes"
+           TextColor="White"
+           FontSize="24"
+           FontAttributes="Bold"
+           HorizontalOptions="Center"
+           Grid.Column="0" />
 
-            <Frame Margin="0,10,0,20"
+            <ImageButton Source="camera.png" 
+                 WidthRequest="30" 
+                 HeightRequest="30" 
+                 HorizontalOptions="End" 
+                 VerticalOptions="Center"
+                 Grid.Column="1" 
+                 Clicked="OnPickPhotoButtonClicked" />
+        </Grid>
+
+        <Frame Margin="0,10,0,20"
                    Padding="10"
                    BackgroundColor="#202020"
                    CornerRadius="12"
@@ -23,13 +31,14 @@
 
                     <Entry Placeholder="Title" 
                            x:Name="txtTitulo"
-                           TextColor="Gray" 
+                           TextColor="White" 
                            FontSize="20" 
                            FontAttributes="Bold" />
 
                     <Label Text="Description" 
                            TextColor="Gray" 
                            FontSize="18" 
+                           Margin="0,30,0,0"
                            FontAttributes="Bold" />
 
                     <Editor Placeholder="Type your note here..."
@@ -40,19 +49,13 @@
 
                     <carousel:CarouselViewUpdate x:Name="CarrouselObject"/>
 
-                    <ImageButton Source="camera.png" 
-                                         WidthRequest="50" 
-                                         HeightRequest="50" 
-                                         HorizontalOptions="Center" 
-                                         Clicked="OnPickPhotoButtonClicked"/>
                 </VerticalStackLayout>
             </Frame>
 
-            <Button Text="Save Note" 
+            <Button Text="Save" 
                     BackgroundColor="#3D5AFE" 
                     TextColor="White" 
                     CornerRadius="8"
                     Clicked="OnUpdateButtonClicked"/>
         </VerticalStackLayout>
-    </ScrollView>
 </ContentPage>

@@ -32,10 +32,10 @@
 
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+		<MauiIcon Include="Resources\AppIcon\logomaui.png" Color="White" ForegroundScale="0.65" />
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+		<MauiSplashScreen Include="Resources\Splash\logoapp.png" Color="#e2f0fe" BaseSize="128,128" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
@@ -51,6 +51,8 @@
 
 	<ItemGroup>
 	  <None Remove="Platforms\Android\Resources\values\strings.xml" />
+	  <None Remove="Resources\AppIcon\logomaui.png" />
+	  <None Remove="Resources\Splash\logoapp.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -81,6 +83,7 @@
 
 	<ItemGroup>
 		<MauiAsset Include="Resources\drawable\notificacion.png" />
+		<MauiSplashScreen Include="Resources\Splash\logoapp.png" />
 	</ItemGroup>
 	<ItemGroup>
 		<MauiImage Include="Resources\drawable\notificacion.png" />
@@ -125,6 +128,12 @@
 	  <MauiXaml Update="Views\components\NotesImg\CarouselView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\components\NotesVoice\CarouselAudio.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\components\NotesVoice\CarouselAudioUpdate.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\DashBoard.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -156,6 +165,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\VoicePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\VoicePageUpdate.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

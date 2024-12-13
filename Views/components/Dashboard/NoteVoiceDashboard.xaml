@@ -7,12 +7,17 @@
             <SwipeView.RightItems>
                 <SwipeItems Mode="Reveal">
                     <SwipeItem 
-                                 BackgroundColor="White" 
-                                 IconImageSource="delete.png"/>
+                                 BackgroundColor="#2C2C2C" 
+                                 IconImageSource="delete.png"
+                                 Clicked="OnDeleteClicked"/>
                     <SwipeItem 
-                                 BackgroundColor="White" 
+                                 BackgroundColor="#2C2C2C" 
                                  IconImageSource="edit.png" 
                                  Clicked="OnEditClicked"/>
+                    <SwipeItem 
+                                 BackgroundColor="#2C2C2C" 
+                                 IconImageSource="share.png"
+                                 />
                 </SwipeItems>
             </SwipeView.RightItems>
 

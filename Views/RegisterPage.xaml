@@ -13,34 +13,34 @@
                 <VerticalStackLayout Spacing="15">
                
                     <VerticalStackLayout Spacing="5">
-                        <Label Text="Nombre" FontAttributes="Bold" FontSize="14" TextColor="Gray"/>
+                        <Label Text="Nombre" FontAttributes="Bold" FontSize="14" TextColor="White"/>
                         <Entry x:Name="txtNombre" Placeholder="Ingrese su nombre" />
                     </VerticalStackLayout>
 
                     <VerticalStackLayout Spacing="5">
-                        <Label Text="Apellido" FontAttributes="Bold" FontSize="14" TextColor="Gray"/>
+                        <Label Text="Apellido" FontAttributes="Bold" FontSize="14" TextColor="White"/>
                         <Entry x:Name="txtApellido" Placeholder="Ingrese su apellido" />
                     </VerticalStackLayout>
 
                     <VerticalStackLayout Spacing="5">
-                        <Label Text="Correo Electrónico" FontAttributes="Bold" FontSize="14" TextColor="Gray"/>
+                        <Label Text="Correo Electrónico" FontAttributes="Bold" FontSize="14" TextColor="White"/>
                         <Entry x:Name="txtEmail" Placeholder="Ingrese su correo electrónico" Keyboard="Email" />
                     </VerticalStackLayout>
 
                     <VerticalStackLayout Spacing="5">
-                        <Label Text="Número Telefónico" FontAttributes="Bold" FontSize="14" TextColor="Gray"/>
+                        <Label Text="Número Telefónico" FontAttributes="Bold" FontSize="14" TextColor="White"/>
                         <Entry x:Name="txtPhone" Placeholder="Ingrese su número" Keyboard="Telephone" />
                     </VerticalStackLayout>
 
                     <VerticalStackLayout Spacing="5">
                         <HorizontalStackLayout Spacing="20">
                             <VerticalStackLayout WidthRequest="150">
-                                <Label Text="Fecha de Nacimiento" FontAttributes="Bold" FontSize="14" TextColor="Gray"/>
+                                <Label Text="Fecha de Nacimiento" FontAttributes="Bold" FontSize="14" TextColor="White"/>
                                 <DatePicker x:Name="txtFechaNacimiento" HorizontalOptions="FillAndExpand" Format="dd MMMM yyyy" />
                             </VerticalStackLayout>
 
                             <VerticalStackLayout WidthRequest="150">
-                                <Label Text="Género" FontAttributes="Bold" FontSize="14" TextColor="Gray"/>
+                                <Label Text="Género" FontAttributes="Bold" FontSize="14" TextColor="White"/>
                                 <Picker x:Name="cboGen" Title="Seleccione" HorizontalOptions="FillAndExpand" SelectedIndexChanged="SelectGen_SelectedIndexChanged">
                                     <Picker.ItemsSource>
                                         <x:Array Type="{x:Type x:String}">
@@ -54,12 +54,12 @@
                     </VerticalStackLayout>
 
                     <VerticalStackLayout Spacing="5">
-                        <Label Text="Usuario" FontAttributes="Bold" FontSize="14" TextColor="Gray"/>
+                        <Label Text="Usuario" FontAttributes="Bold" FontSize="14" TextColor="White"/>
                         <Entry x:Name="txtUserReg" Placeholder="Ingrese su usuario" />
                     </VerticalStackLayout>
 
                     <VerticalStackLayout Spacing="5">
-                        <Label Text="Contraseña" FontAttributes="Bold" FontSize="14" TextColor="Gray"/>
+                        <Label Text="Contraseña" FontAttributes="Bold" FontSize="14" TextColor="White"/>
                         <Grid>
                             <Entry x:Name="txtPasswdReg" Placeholder="Ingrese su contraseña" IsPassword="True" HorizontalOptions="FillAndExpand" />
                             <ImageButton Source="eye.png" HorizontalOptions="End" VerticalOptions="Center" HeightRequest="24" WidthRequest="24" Aspect="AspectFit"/>
@@ -67,7 +67,7 @@
                     </VerticalStackLayout>
 
                     <VerticalStackLayout Spacing="5">
-                        <Label Text="Confirmar Contraseña" FontAttributes="Bold" FontSize="14" TextColor="Gray"/>
+                        <Label Text="Confirmar Contraseña" FontAttributes="Bold" FontSize="14" TextColor="White"/>
                         <Grid>
                             <Entry x:Name="txtPasswdRegChk" Placeholder="Confirme su contraseña" IsPassword="True" HorizontalOptions="FillAndExpand" />
                             <ImageButton Source="eye.png" HorizontalOptions="End" VerticalOptions="Center" HeightRequest="24" WidthRequest="24" Aspect="AspectFit"/>
@@ -76,7 +76,7 @@
 
                 </VerticalStackLayout>
             </Frame>
-            <Button Text="Registrar" BackgroundColor="#50b3f2" TextColor="White" CornerRadius="5" HeightRequest="45" Clicked="RegisterUser_Clicked" />
+            <Button Text="Registrar" BackgroundColor="#3D5AFE" TextColor="White" CornerRadius="5" HeightRequest="45" Clicked="RegisterUser_Clicked" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

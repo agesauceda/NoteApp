@@ -1,14 +1,21 @@
+using NoteApp.Models.common;
 using NoteApp.Models.Dashboard;
+using NoteApp.Services.PhotoPage;
+using System.Collections.ObjectModel;
 
 namespace NoteApp.Views.components.Dashboard;
 
 public partial class NoteImgDashboard : ContentView
 {
 	public ObjectDashBoard element;
-	public NoteImgDashboard(ObjectDashBoard e)
+	private PhotoPageDelete service;
+	private ObservableCollection<ObjectDashBoard> _list;
+    public NoteImgDashboard(ObjectDashBoard e, ObservableCollection<ObjectDashBoard> items)
 	{
 		InitializeComponent();
         element = e;
+        service = new PhotoPageDelete();
+        _list = items;
         InitComponent();
     }
 
@@ -17,5 +24,21 @@ public partial class NoteImgDashboard : ContentView
 		txtDescriptionImg.Text = element.contenido;
 		var fecha = DateTime.Parse(element.fechaCreacion).ToString("dd/MM/yy HH:mm");
 		lbCreationImg.Text = fecha;
+    }
+
+	public async void OnEditRegister(object sender, EventArgs args) {
+		await Navigation.PushAsync(new PhotoPageUpdate(element));
+	}
+    public async void OnDeleteRegister(object sender, EventArgs args)
+    {
+		ApiResponse response = await service.DeleteNoteImg(element.id.Value);
+		if (response.status.Value)
+		{
+			await Application.Current.MainPage.DisplayAlert("Eliminacíón de Nota", response.message, "Aceptar");
+			_list.Remove(element);
+		}
+		else { 
+			await Application.Current.MainPage.DisplayAlert("Eliminacíón de Nota", "Error al eliminar nota", "Aceptar");
+        }
     }
 }

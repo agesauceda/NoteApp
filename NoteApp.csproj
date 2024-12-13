@@ -57,11 +57,15 @@
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+		<PackageReference Include="CommunityToolkit.Maui.MediaElement" Version="4.1.2" />
+		<PackageReference Include="Microsoft.Maui.Controls.Maps" Version="8.0.100" />
 		<PackageReference Include="Plugin.Firebase" Version="3.1.2" />
 		<PackageReference Include="Plugin.Firebase.Core" Version="3.1.0" />
 		<PackageReference Include="Plugin.Firebase.Crashlytics" Version="3.1.0" />
 		<PackageReference Include="SkiaSharp" Version="3.116.1" />
+		<PackageReference Include="Plugin.Maui.Audio" Version="3.0.1" />
 	</ItemGroup>
+	
 
 	<ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
 		<PackageReference Include="Xamarin.AndroidX.Core" Version="1.15.0.1" />
@@ -84,6 +88,12 @@
 		<MauiImage Include="Resources\drawable\notificacion.png" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Compile Update="Views\components\NotesImg\CarouselViewUpdate.xaml.cs">
+	    <DependentUpon>CarouselViewUpdate.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\PhotoPageUpdate.xaml.cs">
+	    <DependentUpon>PhotoPageUpdate.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\ResetPassword.xaml.cs">
 	    <DependentUpon>ResetPassword.xaml</DependentUpon>
 	  </Compile>
@@ -111,6 +121,9 @@
 	  <MauiXaml Update="Views\components\Navbar\NavBar.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\components\NotesImg\CarouselViewUpdate.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\components\NotesImg\CarouselView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -121,6 +134,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\LoginPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\PhotoPageUpdate.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\PhotoPage.xaml">

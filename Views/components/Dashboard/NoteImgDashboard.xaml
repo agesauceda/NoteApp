@@ -9,11 +9,12 @@
                 <SwipeItems Mode="Reveal">
                     <SwipeItem 
                                  BackgroundColor="White" 
-                                 IconImageSource="delete.png"/>
+                                 IconImageSource="delete.png"
+                                 Clicked="OnDeleteRegister"/>
                     <SwipeItem 
                                  BackgroundColor="White" 
                                  IconImageSource="edit.png"
-                                 />
+                                 Clicked="OnEditRegister"/>
                 </SwipeItems>
             </SwipeView.RightItems>
 

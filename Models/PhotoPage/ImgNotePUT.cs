@@ -1,9 +1,9 @@
 ﻿namespace NoteApp.Models.PhotoPage
 {
-    public class NotesImgPOST
+    public class ImgNotePUT
     {
         public string titulo { get; set; }
         public string descripcion { get; set; }
-        public List<string> fotos { get; set; }
+        public List<ImgPOST> fotos { get; set; }
     }
 }

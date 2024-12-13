@@ -48,7 +48,7 @@ public partial class CarouselViewUpdate : ContentView
                 }
             }
             else {
-                await Application.Current.MainPage.DisplayAlert("Eliminación de Imagen", "Eliminar ", "Aceptar");
+                await Application.Current.MainPage.DisplayAlert("Eliminación de Imagen", "Imagen Eliminada.", "Aceptar");
                 img.Remove(element);
                 list.Remove(path);
             }

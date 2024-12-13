@@ -1,4 +1,5 @@
 using NoteApp.Controllers.NotePage;
+using NoteApp.Models.PhotoPage;
 using NoteApp.Models.TextPage;
 using NoteApp.Views.Interfaces;
 using System.Diagnostics;
@@ -41,7 +42,8 @@ public partial class TextPage : ContentPage, TextPageViewInterface
         Console.WriteLine($"campos{txtTitle.Text}");
         Console.WriteLine($"campos{txtDescription.Text}");
         await GetDataAndCreateNote();
-       
+        flushData();
+
     }
 
     public async Task CreateNote(string msg)
@@ -58,6 +60,12 @@ public partial class TextPage : ContentPage, TextPageViewInterface
     public Task LoadNoteForEdit(NoteTextPOST note)
     {
         throw new NotImplementedException();
+    }
+
+    private void flushData()
+    {
+        txtDescription.Text = "";
+        txtTitle.Text = "";
     }
     //para limpiar
     //private void ClearFields()

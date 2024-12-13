@@ -10,6 +10,8 @@ namespace NoteApp.Views;
 public partial class DashBoard : ContentPage, DashboardViewInterface
 {
     private readonly DashboardControllerInterface _controller;
+    //private List<ObjectDashBoard> _list = new List<ObjectDashBoard>();
+    private NoteTextPOST notasText;
     private ObservableCollection<ObjectDashBoard> _list = new ObservableCollection<ObjectDashBoard>();
 	public DashBoard()
 	{

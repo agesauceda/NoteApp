@@ -4,6 +4,9 @@ using NoteApp.Views.Interfaces;
 using NoteApp.Utils;
 using CommunityToolkit.Maui.Media;
 using NoteApp.Models.Dashboard;
+using Microsoft.Maui.Controls.Maps;
+using Microsoft.Maui.Devices.Sensors;
+using Microsoft.Maui.Maps;
 //using AndroidX.Window.Embedding;
 
 namespace NoteApp.Views;
@@ -12,9 +15,11 @@ public partial class EventPageUpdate : ContentPage, EventPageViewInterface
 {
     private EventPageController _controller;
     private ReminderPUT e;
+    private Pin pinLocation = null;
+    private Location location;
     string fotoBase64;
 
-     private ObjectDashBoard obj;
+    private ObjectDashBoard obj;
     int id = 0;
 
     public EventPageUpdate(ObjectDashBoard o)
@@ -29,12 +34,14 @@ public partial class EventPageUpdate : ContentPage, EventPageViewInterface
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-         txtTitulo.Text = obj.titulo;
-         txtDescripcion.Text = obj.contenido;
-         txtFechaIni.Date = DateTime.Parse(obj.fechaInicio);
-         txtFechaFin.Date = DateTime.Parse(obj.fechaFinal);
-         //txtHoraIni.Time = DateTime.Parse(obj.fechaInicio, null, System.Globalization.DateTimeStyles.RoundtripKind).TimeOfDay;
-         await _controller.GetReminder(obj.id.Value);
+        //txtTitulo.Text = obj.titulo;
+        //txtDescripcion.Text = obj.contenido;
+        //txtFechaIni.Date = DateTime.Parse(obj.fechaInicio);
+        //txtFechaFin.Date = DateTime.Parse(obj.fechaFinal);
+        //fotoBase64 = obj.imagen;
+        //txtHoraIni.Time = DateTime.Parse(obj.fechaInicio, null, System.Globalization.DateTimeStyles.RoundtripKind).TimeOfDay;
+        await _controller.GetReminder(obj.id.Value);
+        await RequestPermissions.SolicitarPermisosUbicacion();
     }
 
     private async Task getData()
@@ -57,8 +64,8 @@ public partial class EventPageUpdate : ContentPage, EventPageViewInterface
                     id = this.id,
                     titulo = titulo,
                     descripcion = descripcion,
-                    ubicacion = ubicacion,
-                    imagen = this.fotoBase64,
+                    ubicacion = string.IsNullOrEmpty(ubicacion) ? null : ubicacion,
+                    imagen = string.IsNullOrEmpty(this.fotoBase64) ? null : this.fotoBase64,
                     fecha_inicio = fecha_inicio + " " + hora_inicio,
                     fecha_final = fecha_final + " " + hora_final,
 
@@ -70,7 +77,7 @@ public partial class EventPageUpdate : ContentPage, EventPageViewInterface
                 }
                 else
                 {
-                    Console.WriteLine("Base64 Enviado: " + this.fotoBase64.Substring(0, 100)); 
+                    Console.WriteLine("Base64 Enviado: " + this.fotoBase64.Substring(0, 100));
 
                 }
 
@@ -97,15 +104,40 @@ public partial class EventPageUpdate : ContentPage, EventPageViewInterface
         imgPreview.Source = null;
         txtFechaIni.Date = DateTime.Now;
         txtFechaFin.Date = DateTime.Now;
+        if (pinLocation != null)
+        {
+            MapLoc.Pins.Remove(pinLocation);
+            pinLocation = null;  
+        }
+        MapLoc.MoveToRegion(MapSpan.FromCenterAndRadius(new Location(15.848705, -87.934471), Distance.FromKilometers(1)));
 
     }
-  
+
 
     private async void OnActualizarEvento_Clicked(object sender, EventArgs e)
     {
         await getData();
-       
+
     }
+
+    private void OnMapClicked(object sender, MapClickedEventArgs e)
+    {
+        location = e.Location;
+        if (pinLocation != null)
+        {
+            MapLoc.Pins.Remove(pinLocation);
+        }
+        pinLocation = new Pin()
+        {
+            Label = "Lugar Seleccionado",
+            Type = PinType.Place,
+            Location = location
+        };
+        MapLoc.Pins.Add(pinLocation);
+        txtUbicacion.Text = $"{location.Latitude}, {location.Longitude}";
+
+    }
+
 
     private async void OnTakePhotoButtonClicked(object sender, EventArgs e)
     {
@@ -141,7 +173,7 @@ public partial class EventPageUpdate : ContentPage, EventPageViewInterface
         {
             await Application.Current.MainPage.DisplayAlert("Error", $"No se pudo capturar la foto: {ex.Message}", "OK");
         }
-             
+
     }
 
     public Task InsertReminder(string msg)
@@ -151,11 +183,58 @@ public partial class EventPageUpdate : ContentPage, EventPageViewInterface
 
     public async Task UpdateReminder(ReminderPUT reminder)
     {
-         await DisplayAlert("Éxito", "Recordatorio actualizado correctamente.", "OK");
+        await DisplayAlert("Éxito", "Recordatorio actualizado correctamente.", "OK");
     }
 
     public async Task GetReminder(ReminderGET? reminder)
     {
-        await DisplayAlert("Éxito", "Recordatorio actualizado correctamente.", "OK");
+        if (reminder != null)
+        {
+            // Poblar los campos con los datos obtenidos
+            txtTitulo.Text = reminder.titulo;
+            txtDescripcion.Text = reminder.descripcion;
+            txtUbicacion.Text = reminder.ubicacion ?? string.Empty;
+            string[] arr = reminder.ubicacion.Split(",");
+            location = new Location()
+            {
+                Latitude = Convert.ToDouble(arr[0]),
+                Longitude = Convert.ToDouble(arr[1]),
+            };
+            pinLocation = new Pin()
+            {
+                Label = "Lugar Seleccionado",
+                Type = PinType.Place,
+                Location = location
+            };
+            MapLoc.Pins.Add(pinLocation);
+            MapSpan moveMap = MapSpan.FromCenterAndRadius(location, Distance.FromKilometers(0.5));
+            MapLoc.MoveToRegion(moveMap);
+
+
+            txtFechaIni.Date = DateTime.Parse(reminder.fecha_inicio);
+            txtFechaFin.Date = DateTime.Parse(reminder.fecha_final);
+            txtHoraIni.Time = DateTime.Parse(reminder.fecha_inicio).TimeOfDay;
+            txtHoraFin.Time = DateTime.Parse(reminder.fecha_final).TimeOfDay;
+
+            // Decodificar imagen en base64 (si existe)
+            if (!string.IsNullOrEmpty(reminder.imagen))
+            {
+                try
+                {
+                    byte[] imageBytes = Convert.FromBase64String(reminder.imagen); imgPreview.Source = ImageSource.FromStream(() => new MemoryStream(imageBytes)); fotoBase64 = reminder.imagen; // Guardar la imagen actual
+                }
+                catch (FormatException ex)
+                {       
+                    await DisplayAlert("Error", "La imagen no tiene un formato Base64 válido.", "OK");
+                }
+                }
+                else
+                {
+                    imgPreview.Source = null; 
+                    fotoBase64 = null; 
+                }
+            }
+            else
+            { await DisplayAlert("Error", "No se ha recibido imagen en el recordatorio.", "OK"); }
+        }
     }
-}

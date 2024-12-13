@@ -31,6 +31,7 @@ public partial class TextPageUpdate : ContentPage, TextPageViewInterface
         base.OnAppearing();
         txtTitle.Text = noteText.titulo;
         txtDescription.Text = noteText.descripcion;
+
     }
 
     private async Task GetDataAndUpdateNote()

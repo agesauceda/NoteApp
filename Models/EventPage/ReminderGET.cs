@@ -14,9 +14,9 @@ namespace NoteApp.Models.EventPage
         public string? ubicacion { get; set; }
         [JsonPropertyName("imagen")]
         public string? imagen { get; set; }
-        [JsonPropertyName("fecha_inicio")]
+        [JsonPropertyName("fechaInicio")]
         public string? fecha_inicio { get; set; }
-        [JsonPropertyName("fecha_final")]
+        [JsonPropertyName("fechaFinal")]
         public string? fecha_final { get; set; }
         
     }

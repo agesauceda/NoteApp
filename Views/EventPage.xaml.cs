@@ -4,6 +4,7 @@ using NoteApp.Views.Interfaces;
 using NoteApp.Utils;
 using CommunityToolkit.Maui.Media;
 using Microsoft.Maui.Controls.Maps;
+using Microsoft.Maui.Maps;
 
 namespace NoteApp.Views;
 
@@ -35,7 +36,7 @@ public partial class EventPage : ContentPage, EventPageViewInterface
         {
             string titulo = txtTitulo.Text;
             string descripcion = txtDescripcion.Text;
-           // string ubicacion = txtUbicacion.Text;
+            string ubicacion = txtUbicacion.Text;
             string fecha_inicio = txtFechaIni.Date.ToString("yyyy-MM-dd");
             string fecha_final = txtFechaFin.Date.ToString("yyyy-MM-dd");
             string hora_final = new DateTime(txtHoraFin.Time.Ticks).ToString("HH:mm:ss");
@@ -48,8 +49,8 @@ public partial class EventPage : ContentPage, EventPageViewInterface
                 {
                     titulo = titulo,
                     descripcion = descripcion,
-                    //ubicacion = ubicacion,
-                    imagen = this.fotoBase64,
+                    ubicacion = string.IsNullOrEmpty(ubicacion) ? null : ubicacion,
+                    imagen = string.IsNullOrEmpty(this.fotoBase64) ? null : this.fotoBase64,
                     fecha_inicio = fecha_inicio + " " + hora_inicio,
                     fecha_final = fecha_final + " " + hora_final,
 
@@ -64,8 +65,6 @@ public partial class EventPage : ContentPage, EventPageViewInterface
                     Console.WriteLine("Base64 Enviado: " + this.fotoBase64.Substring(0, 100)); 
 
                 }
-
-
                 await _controller.InsertReminder(e);
                 flushData();
             }
@@ -85,10 +84,16 @@ public partial class EventPage : ContentPage, EventPageViewInterface
 
         txtTitulo.Text = string.Empty;
         txtDescripcion.Text = string.Empty;
-        //txtUbicacion.Text = string.Empty;
+        txtUbicacion.Text = string.Empty;
         imgPreview.Source = null;
         txtFechaIni.Date = DateTime.Now;
         txtFechaFin.Date = DateTime.Now;
+        if (pinLocation != null)
+        {
+            MapLoc.Pins.Remove(pinLocation);
+            pinLocation = null;  
+        }
+        MapLoc.MoveToRegion(MapSpan.FromCenterAndRadius(new Location(15.848705, -87.934471), Distance.FromKilometers(1)));
 
     }
 
@@ -161,6 +166,7 @@ public partial class EventPage : ContentPage, EventPageViewInterface
             Location = location
         };
         MapLoc.Pins.Add(pinLocation);
+        txtUbicacion.Text = $"{location.Latitude},{location.Longitude}";
 
     }
 }

@@ -110,10 +110,20 @@
                                       MapClicked="OnMapClicked"/>
                         </Frame>
                         
+                        
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout>
+                        <Entry x:Name="txtUbicacion"
+                            TextColor="White"
+                            FontSize="14"
+                            Placeholder="Ubicación no seleccionada"
+                            VerticalOptions="Center"
+                            BackgroundColor="Transparent"
+                            HorizontalOptions="FillAndExpand" />
                     </HorizontalStackLayout>
 
                     <HorizontalStackLayout Spacing="10">
-                        <ImageButton Source="imagen.png"
+                            <ImageButton Source="imagen.png"
                                 Clicked="OnTakePhotoButtonClicked"
                                 HeightRequest="24"
                                 WidthRequest="24"
@@ -130,10 +140,6 @@
                         >
                             <Image x:Name="imgPreview" Aspect="AspectFill" />
                         </Frame>
-
-
-
-
                     </HorizontalStackLayout>
 
                     <Frame Margin="0,10,0,0"

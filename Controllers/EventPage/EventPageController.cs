@@ -17,6 +17,11 @@ namespace NoteApp.Controllers.EventPage
         }
         public async Task InsertReminder(ReminderPOST e)
         {
+            if (e == null)
+            {
+                await _view.InsertReminder("El recordatorio no puede ser nulo.");
+                return;
+            }
             ApiResponseReminder response = await _service.InsertReminder(e);
 
             Console.WriteLine("Insertando recordatorio:");
@@ -38,36 +43,41 @@ namespace NoteApp.Controllers.EventPage
 
         public async Task GetReminder(int id)
         {
-           ApiResponseReminder response = await _service.GetReminder(id);
+            ApiResponseReminder response = await _service.GetReminder(id);
 
-   
-            if (response.status.Value && response.data != null)
+
+            if (response.status.Value)
             {
 
-                var reminder = response.data.FirstOrDefault();
-
-                if (reminder != null)
-                {
-                    await _view.GetReminder(reminder);
-                }
-                else
+                if (response.data == null || !response.data.Any())
                 {
                     await _view.GetReminder(null);
                 }
+                else
+                {
+                    var reminder = response.data.FirstOrDefault();
+                    await _view.GetReminder(reminder);
+                }
+            }
+            else
+            {
+                await _view.GetReminder(null);
             }
         }
 
         public async Task UpdateReminder(ReminderPUT e, int id)
         {
             ApiResponseReminder response = await _service.UpdateReminder(e, id);
-            if (response.status.Value)
+
+            if (response.status.HasValue && response.status.Value)
             {
-                //await _view.UpdateReminder(response.message);
+                await _view.UpdateReminder(e);
             }
             else
             {
-                //await _view.UpdateReminder("Error al actualizar la nota");
+                await _view.UpdateReminder(null); // Opcional, puedes manejar errores aquí si es necesario.
             }
         }
+
     }
 }

@@ -1,6 +1,7 @@
 using NoteApp.Models.common;
 using NoteApp.Models.Dashboard;
 using NoteApp.Services.VoicePage;
+using System.Collections.ObjectModel;
 
 namespace NoteApp.Views.components.Dashboard;
 
@@ -8,11 +9,13 @@ public partial class NoteVoiceDashboard : ContentView
 {
 	public ObjectDashBoard element;
 	private AudioPageDelete service;
-	public NoteVoiceDashboard(ObjectDashBoard e)
+	private ObservableCollection<ObjectDashBoard> _list;
+	public NoteVoiceDashboard(ObjectDashBoard e, ObservableCollection<ObjectDashBoard> items)
 	{
 		InitializeComponent();
 		element = e;
 		service = new AudioPageDelete();
+		_list = items;
 		InitComponent();
 	}
 	private void InitComponent() { 
@@ -31,6 +34,8 @@ public partial class NoteVoiceDashboard : ContentView
 	{
 		ApiResponse response = await service.DeleteNoteAudio(element.id.Value);
         await Application.Current.MainPage.DisplayAlert("Eliminacíón de Nota", (response.status.Value) ? response.message : "No se pudo eliminar la nota", "Aceptar");
+        _list.Remove(element);
+
     }
 
 }

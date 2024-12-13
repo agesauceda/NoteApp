@@ -4,12 +4,11 @@
              xmlns:maps="http://schemas.microsoft.com/dotnet/2021/maui/maps"
              x:Class="NoteApp.Views.EventPage"
              xmlns:navbar="clr-namespace:NoteApp.Views.components.Navbar"
-             Background="Black"
              Title="">
 
     <ScrollView>
-        <VerticalStackLayout Padding="20">
-            <Label Text="Notes"
+        <VerticalStackLayout Padding="20,0,20,20">
+            <Label Text="Event Notes"
                    TextColor="White"
                    FontSize="24"
                    Margin="0,10,0,10"
@@ -29,7 +28,7 @@
                     <Entry
                         x:Name="txtTitulo"
                         Placeholder="Title"
-                        TextColor="Gray"
+                        TextColor="White"
                         FontSize="20"
                         FontAttributes="Bold"
                         BackgroundColor="Transparent"
@@ -173,7 +172,7 @@
                 </VerticalStackLayout>
             </Frame>
 
-            <Button Text="Save Note"
+            <Button Text="Save"
                     Clicked="OnGuardarEvento_Clicked"
                     BackgroundColor="#3D5AFE"
                     TextColor="White"

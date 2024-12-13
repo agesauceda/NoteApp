@@ -61,16 +61,16 @@ public partial class DashBoard : ContentPage, DashboardViewInterface
         switch (item.tipoNota)
         {
             case "TEXTO":
-                DashboardContent.Add(new NoteTextDashboard(item));
+                DashboardContent.Add(new NoteTextDashboard(item, _list));
                 break;
             case "IMAGEN":
                 DashboardContent.Add(new NoteImgDashboard(item, _list));
                 break;
             case "AUDIO":
-                DashboardContent.Add(new NoteVoiceDashboard(item));
+                DashboardContent.Add(new NoteVoiceDashboard(item, _list));
                 break;
             case "RECORDATORIOS":
-                DashboardContent.Add(new ReminderDashboard(item));
+                DashboardContent.Add(new ReminderDashboard(item, _list));
                 break;
             default:
                 break;

@@ -200,10 +200,10 @@ public partial class EventPageUpdate : ContentPage, EventPageViewInterface
             MapLoc.MoveToRegion(moveMap);
 
 
-            txtFechaIni.Date = DateTime.Parse(reminder.fecha_inicio);
-            txtFechaFin.Date = DateTime.Parse(reminder.fecha_final);
-            txtHoraIni.Time = DateTime.Parse(reminder.fecha_inicio).TimeOfDay;
-            txtHoraFin.Time = DateTime.Parse(reminder.fecha_final).TimeOfDay;
+            txtFechaIni.Date = DateTimeOffset.Parse(reminder.fecha_inicio).DateTime;
+            txtFechaFin.Date = DateTimeOffset.Parse(reminder.fecha_final).DateTime;
+            txtHoraIni.Time = DateTimeOffset.Parse(reminder.fecha_inicio).TimeOfDay;
+            txtHoraFin.Time = DateTimeOffset.Parse(reminder.fecha_final).TimeOfDay;
 
             if (!string.IsNullOrEmpty(reminder.imagen))
             {

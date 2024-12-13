@@ -7,25 +7,22 @@
              Title="YOUR DASHBOARD">
 
     <Grid>
-
         <ScrollView>
             <VerticalStackLayout x:Name="DashboardContent" Padding="10">
-
             </VerticalStackLayout>
         </ScrollView>
 
-
         <HorizontalStackLayout>
-            <ImageButton Source="add.png"
-                     HeightRequest="80"
-                     WidthRequest="80"
+            <ImageButton Source="logout.png"
+                     HeightRequest="50"
+                     WidthRequest="50"
                      BackgroundColor="Transparent"
                      HorizontalOptions="End"
                      VerticalOptions="End"
                      Clicked="LogoutClicked"/>
 
             <ImageButton Source="add.png"
-                     HeightRequest="80"
+                     HeightRequest="60"
                      WidthRequest="80"
                      BackgroundColor="Transparent"
                      HorizontalOptions="End"

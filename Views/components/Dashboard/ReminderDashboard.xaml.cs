@@ -1,4 +1,5 @@
 using NoteApp.Models.Dashboard;
+using NoteApp.Models.EventPage;
 
 namespace NoteApp.Views.components.Dashboard;
 
@@ -9,7 +10,7 @@ public partial class ReminderDashboard : ContentView
 	{
 		InitializeComponent();
 		element = e;
-		 InitComponent(); 
+		InitComponent();
 	}
 	private void InitComponent() {
 		lbTitleReminder.Text = element.titulo;
@@ -19,6 +20,17 @@ public partial class ReminderDashboard : ContentView
 		timeFinReminder.Text = DateTime.Parse(element.fechaFinal).ToString("HH:mm");
 		txtDescriptionReminder.Text = element.contenido;
 		lbCreationReminder.Text = DateTime.Parse(element.fechaCreacion).ToString("dd/MM/yy HH:mm");
-
     }
+
+	public async void EditReminder(object sender, EventArgs args) {
+		//var id = element.id != null? element.id : 0;
+		await Navigation.PushAsync(new EventPageUpdate(element));
+		//Console.WriteLine("************************* editar boton dinámico");
+	}
+    public async void DeleteReminder(object sender, EventArgs args)
+    {
+		//ApiResponseReminder response = await _service.DeleteNoteImg(element.id.Value);
+		//await Application.Current.MainPage.DisplayAlert("Eliminar Nota", (response.status.Value) ? response.message : "No se pudo eliminar la nota", "Aceptar");
+    }
+
 }

@@ -10,7 +10,8 @@ namespace NoteApp.Controllers.EventPage
         private readonly HttpClient _client = App._client.getClient();
         private EventPageService _service;
         private EventPageViewInterface _view;
-        public EventPageController(EventPageViewInterface view) { 
+        public EventPageController(EventPageViewInterface view)
+        {
             this._service = new EventPageService(_client);
             this._view = view;
         }
@@ -32,6 +33,40 @@ namespace NoteApp.Controllers.EventPage
             else
             {
                 await _view.InsertReminder("Error al registrar el Evento");
+            }
+        }
+
+        public async Task GetReminder(int id)
+        {
+           ApiResponseReminder response = await _service.GetReminder(id);
+
+   
+            if (response.status.Value && response.data != null)
+            {
+
+                var reminder = response.data.FirstOrDefault();
+
+                if (reminder != null)
+                {
+                    await _view.GetReminder(reminder);
+                }
+                else
+                {
+                    await _view.GetReminder(null);
+                }
+            }
+        }
+
+        public async Task UpdateReminder(ReminderPUT e, int id)
+        {
+            ApiResponseReminder response = await _service.UpdateReminder(e, id);
+            if (response.status.Value)
+            {
+                //await _view.UpdateReminder(response.message);
+            }
+            else
+            {
+                //await _view.UpdateReminder("Error al actualizar la nota");
             }
         }
     }

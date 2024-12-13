@@ -3,30 +3,42 @@ using NoteApp.Models.EventPage;
 using NoteApp.Views.Interfaces;
 using NoteApp.Utils;
 using CommunityToolkit.Maui.Media;
+using NoteApp.Models.Dashboard;
+using AndroidX.Window.Embedding;
 
 namespace NoteApp.Views;
 
-public partial class EventPage : ContentPage, EventPageViewInterface
+public partial class EventPageUpdate : ContentPage, EventPageViewInterface
 {
     private EventPageController _controller;
-    private ReminderPOST e;
+    private ReminderPUT e;
     string fotoBase64;
 
-    public EventPage()
+     private ObjectDashBoard obj;
+    int id = 0;
+
+    public EventPageUpdate(ObjectDashBoard o)
     {
         InitializeComponent();
+        this.id = (int)(o.id != null ? o.id : 0);
+        obj = o;
         this._controller = new EventPageController((EventPageViewInterface)this);
+
     }
 
     protected override async void OnAppearing()
     {
         base.OnAppearing();
+         txtTitulo.Text = obj.titulo;
+         txtDescripcion.Text = obj.contenido;
+         txtFechaIni.Date = DateTime.Parse(obj.fechaInicio);
+         txtFechaFin.Date = DateTime.Parse(obj.fechaFinal);
+         txtHoraIni.Time = DateTime.Parse(obj.fechaInicio, null, System.Globalization.DateTimeStyles.RoundtripKind).TimeOfDay;
+         await _controller.GetReminder(obj.id.Value);
     }
-
 
     private async Task getData()
     {
-
         try
         {
             string titulo = txtTitulo.Text;
@@ -40,8 +52,9 @@ public partial class EventPage : ContentPage, EventPageViewInterface
             if (Validator.ValidateString(titulo) && Validator.ValidateString(descripcion) && Validator.ValidateString(ubicacion)
                 && Validator.ValidateString(fecha_inicio) && Validator.ValidateString(fecha_final))
             {
-                e = new ReminderPOST
+                this.e = new ReminderPUT
                 {
+                    id = this.id,
                     titulo = titulo,
                     descripcion = descripcion,
                     ubicacion = ubicacion,
@@ -57,12 +70,11 @@ public partial class EventPage : ContentPage, EventPageViewInterface
                 }
                 else
                 {
-                    Console.WriteLine("Base64 Enviado: " + this.fotoBase64.Substring(0, 100)); // Solo muestra los primeros 100 caracteres
+                    Console.WriteLine("Base64 Enviado: " + this.fotoBase64.Substring(0, 100)); 
 
                 }
 
-
-                await _controller.InsertReminder(e);
+                await _controller.UpdateReminder(e, id);
                 flushData();
             }
             else
@@ -87,15 +99,12 @@ public partial class EventPage : ContentPage, EventPageViewInterface
         txtFechaFin.Date = DateTime.Now;
 
     }
+  
 
-    public async Task InsertReminder(string msg)
-    {
-        await DisplayAlert("Success", msg, "OK");
-    }
-
-    private async void OnGuardarEvento_Clicked(object sender, EventArgs e)
+    private async void OnActualizarEvento_Clicked(object sender, EventArgs e)
     {
         await getData();
+       
     }
 
     private async void OnTakePhotoButtonClicked(object sender, EventArgs e)
@@ -135,13 +144,18 @@ public partial class EventPage : ContentPage, EventPageViewInterface
              
     }
 
-    public async Task UpdateReminder(ReminderPUT reminder)
-    {
-        await DisplayAlert("Actualizaci�n de Evento", "aasdfasdf", "Aceptar");
-    }
-
-    public Task GetReminder(ReminderGET? reminder)
+    public Task InsertReminder(string msg)
     {
         throw new NotImplementedException();
+    }
+
+    public async Task UpdateReminder(ReminderPUT reminder)
+    {
+         await DisplayAlert("Éxito", "Recordatorio actualizado correctamente.", "OK");
+    }
+
+    public async Task GetReminder(ReminderGET? reminder)
+    {
+        await DisplayAlert("Éxito", "Recordatorio actualizado correctamente.", "OK");
     }
 }

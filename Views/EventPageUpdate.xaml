@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="NoteApp.Views.EventPage"
+             x:Class="NoteApp.Views.EventPageUpdate"
              xmlns:navbar="clr-namespace:NoteApp.Views.components.Navbar"
              Background="Black"
              Title="">
@@ -157,8 +157,8 @@
                 </VerticalStackLayout>
             </Frame>
 
-            <Button Text="Save Note"
-                    Clicked="OnGuardarEvento_Clicked"
+            <Button Text="Update Note"
+                    Clicked="OnActualizarEvento_Clicked"
                     BackgroundColor="#3D5AFE"
                     TextColor="White"
                     CornerRadius="8"

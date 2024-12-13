@@ -35,20 +35,20 @@ public partial class EventPage : ContentPage, EventPageViewInterface
         {
             string titulo = txtTitulo.Text;
             string descripcion = txtDescripcion.Text;
-            string ubicacion = txtUbicacion.Text;
+           // string ubicacion = txtUbicacion.Text;
             string fecha_inicio = txtFechaIni.Date.ToString("yyyy-MM-dd");
             string fecha_final = txtFechaFin.Date.ToString("yyyy-MM-dd");
             string hora_final = new DateTime(txtHoraFin.Time.Ticks).ToString("HH:mm:ss");
             string hora_inicio = new DateTime(txtHoraIni.Time.Ticks).ToString("HH:mm:ss");
 
-            if (Validator.ValidateString(titulo) && Validator.ValidateString(descripcion) && Validator.ValidateString(ubicacion)
+            if (Validator.ValidateString(titulo) && Validator.ValidateString(descripcion) 
                 && Validator.ValidateString(fecha_inicio) && Validator.ValidateString(fecha_final))
             {
                 e = new ReminderPOST
                 {
                     titulo = titulo,
                     descripcion = descripcion,
-                    ubicacion = ubicacion,
+                    //ubicacion = ubicacion,
                     imagen = this.fotoBase64,
                     fecha_inicio = fecha_inicio + " " + hora_inicio,
                     fecha_final = fecha_final + " " + hora_final,
@@ -61,7 +61,7 @@ public partial class EventPage : ContentPage, EventPageViewInterface
                 }
                 else
                 {
-                    Console.WriteLine("Base64 Enviado: " + this.fotoBase64.Substring(0, 100)); // Solo muestra los primeros 100 caracteres
+                    Console.WriteLine("Base64 Enviado: " + this.fotoBase64.Substring(0, 100)); 
 
                 }
 
@@ -76,7 +76,7 @@ public partial class EventPage : ContentPage, EventPageViewInterface
         }
         catch (Exception e)
         {
-            await DisplayAlert("Excpcion", e.Message, "OK");
+            await DisplayAlert("Excepcion", e.Message, "OK");
         }
     }
     private void flushData()
@@ -85,7 +85,7 @@ public partial class EventPage : ContentPage, EventPageViewInterface
 
         txtTitulo.Text = string.Empty;
         txtDescripcion.Text = string.Empty;
-        txtUbicacion.Text = string.Empty;
+        //txtUbicacion.Text = string.Empty;
         imgPreview.Source = null;
         txtFechaIni.Date = DateTime.Now;
         txtFechaFin.Date = DateTime.Now;

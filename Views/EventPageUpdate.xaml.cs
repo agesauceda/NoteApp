@@ -4,7 +4,7 @@ using NoteApp.Views.Interfaces;
 using NoteApp.Utils;
 using CommunityToolkit.Maui.Media;
 using NoteApp.Models.Dashboard;
-using AndroidX.Window.Embedding;
+//using AndroidX.Window.Embedding;
 
 namespace NoteApp.Views;
 
@@ -33,7 +33,7 @@ public partial class EventPageUpdate : ContentPage, EventPageViewInterface
          txtDescripcion.Text = obj.contenido;
          txtFechaIni.Date = DateTime.Parse(obj.fechaInicio);
          txtFechaFin.Date = DateTime.Parse(obj.fechaFinal);
-         txtHoraIni.Time = DateTime.Parse(obj.fechaInicio, null, System.Globalization.DateTimeStyles.RoundtripKind).TimeOfDay;
+         //txtHoraIni.Time = DateTime.Parse(obj.fechaInicio, null, System.Globalization.DateTimeStyles.RoundtripKind).TimeOfDay;
          await _controller.GetReminder(obj.id.Value);
     }
 

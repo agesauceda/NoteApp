@@ -7,7 +7,6 @@ using Plugin.Firebase.Core;
 using NoteApp.Controllers.Auth;
 using CommunityToolkit.Maui;
 using Microsoft.Maui.Handlers;
-using CommunityToolkit.Maui;
 using Plugin.Maui.Audio;
 
 

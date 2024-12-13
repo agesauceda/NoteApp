@@ -23,14 +23,12 @@ public partial class ReminderDashboard : ContentView
     }
 
 	public async void EditReminder(object sender, EventArgs args) {
-		//var id = element.id != null? element.id : 0;
 		await Navigation.PushAsync(new EventPageUpdate(element));
-		//Console.WriteLine("************************* editar boton dinámico");
+		
 	}
     public async void DeleteReminder(object sender, EventArgs args)
     {
-		//ApiResponseReminder response = await _service.DeleteNoteImg(element.id.Value);
-		//await Application.Current.MainPage.DisplayAlert("Eliminar Nota", (response.status.Value) ? response.message : "No se pudo eliminar la nota", "Aceptar");
+	
     }
 
 }

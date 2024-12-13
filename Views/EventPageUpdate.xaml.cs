@@ -3,52 +3,61 @@ using NoteApp.Models.EventPage;
 using NoteApp.Views.Interfaces;
 using NoteApp.Utils;
 using CommunityToolkit.Maui.Media;
-using Microsoft.Maui.Controls.Maps;
+using NoteApp.Models.Dashboard;
+//using AndroidX.Window.Embedding;
 
 namespace NoteApp.Views;
 
-public partial class EventPage : ContentPage, EventPageViewInterface
+public partial class EventPageUpdate : ContentPage, EventPageViewInterface
 {
-    private Pin pinLocation = null;
-    private Location location;
     private EventPageController _controller;
-    private ReminderPOST e;
+    private ReminderPUT e;
     string fotoBase64;
 
-    public EventPage()
+     private ObjectDashBoard obj;
+    int id = 0;
+
+    public EventPageUpdate(ObjectDashBoard o)
     {
         InitializeComponent();
+        this.id = (int)(o.id != null ? o.id : 0);
+        obj = o;
         this._controller = new EventPageController((EventPageViewInterface)this);
+
     }
 
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        await RequestPermissions.SolicitarPermisosUbicacion();
+         txtTitulo.Text = obj.titulo;
+         txtDescripcion.Text = obj.contenido;
+         txtFechaIni.Date = DateTime.Parse(obj.fechaInicio);
+         txtFechaFin.Date = DateTime.Parse(obj.fechaFinal);
+         //txtHoraIni.Time = DateTime.Parse(obj.fechaInicio, null, System.Globalization.DateTimeStyles.RoundtripKind).TimeOfDay;
+         await _controller.GetReminder(obj.id.Value);
     }
-
 
     private async Task getData()
     {
-
         try
         {
             string titulo = txtTitulo.Text;
             string descripcion = txtDescripcion.Text;
-           // string ubicacion = txtUbicacion.Text;
+            string ubicacion = txtUbicacion.Text;
             string fecha_inicio = txtFechaIni.Date.ToString("yyyy-MM-dd");
             string fecha_final = txtFechaFin.Date.ToString("yyyy-MM-dd");
             string hora_final = new DateTime(txtHoraFin.Time.Ticks).ToString("HH:mm:ss");
             string hora_inicio = new DateTime(txtHoraIni.Time.Ticks).ToString("HH:mm:ss");
 
-            if (Validator.ValidateString(titulo) && Validator.ValidateString(descripcion) 
+            if (Validator.ValidateString(titulo) && Validator.ValidateString(descripcion) && Validator.ValidateString(ubicacion)
                 && Validator.ValidateString(fecha_inicio) && Validator.ValidateString(fecha_final))
             {
-                e = new ReminderPOST
+                this.e = new ReminderPUT
                 {
+                    id = this.id,
                     titulo = titulo,
                     descripcion = descripcion,
-                    //ubicacion = ubicacion,
+                    ubicacion = ubicacion,
                     imagen = this.fotoBase64,
                     fecha_inicio = fecha_inicio + " " + hora_inicio,
                     fecha_final = fecha_final + " " + hora_final,
@@ -65,8 +74,7 @@ public partial class EventPage : ContentPage, EventPageViewInterface
 
                 }
 
-
-                await _controller.InsertReminder(e);
+                await _controller.UpdateReminder(e, id);
                 flushData();
             }
             else
@@ -76,7 +84,7 @@ public partial class EventPage : ContentPage, EventPageViewInterface
         }
         catch (Exception e)
         {
-            await DisplayAlert("Excepcion", e.Message, "OK");
+            await DisplayAlert("Excpcion", e.Message, "OK");
         }
     }
     private void flushData()
@@ -85,21 +93,18 @@ public partial class EventPage : ContentPage, EventPageViewInterface
 
         txtTitulo.Text = string.Empty;
         txtDescripcion.Text = string.Empty;
-        //txtUbicacion.Text = string.Empty;
+        txtUbicacion.Text = string.Empty;
         imgPreview.Source = null;
         txtFechaIni.Date = DateTime.Now;
         txtFechaFin.Date = DateTime.Now;
 
     }
+  
 
-    public async Task InsertReminder(string msg)
-    {
-        await DisplayAlert("Success", msg, "OK");
-    }
-
-    private async void OnGuardarEvento_Clicked(object sender, EventArgs e)
+    private async void OnActualizarEvento_Clicked(object sender, EventArgs e)
     {
         await getData();
+       
     }
 
     private async void OnTakePhotoButtonClicked(object sender, EventArgs e)
@@ -139,28 +144,18 @@ public partial class EventPage : ContentPage, EventPageViewInterface
              
     }
 
-    public async Task UpdateReminder(ReminderPUT reminder)
-    {
-        await DisplayAlert("Actualizacion de Evento", "aasdfasdf", "Aceptar");
-    }
-
-    public Task GetReminder(ReminderGET? reminder)
+    public Task InsertReminder(string msg)
     {
         throw new NotImplementedException();
     }
 
-    private void OnMapClicked(object sender, MapClickedEventArgs e) {
-        location = e.Location;
-        if (pinLocation != null) {
-            MapLoc.Pins.Remove(pinLocation);
-        }
-        pinLocation = new Pin()
-        {
-            Label = "Lugar Seleccionado",
-            Type = PinType.Place,
-            Location = location
-        };
-        MapLoc.Pins.Add(pinLocation);
+    public async Task UpdateReminder(ReminderPUT reminder)
+    {
+         await DisplayAlert("Éxito", "Recordatorio actualizado correctamente.", "OK");
+    }
 
+    public async Task GetReminder(ReminderGET? reminder)
+    {
+        await DisplayAlert("Éxito", "Recordatorio actualizado correctamente.", "OK");
     }
 }

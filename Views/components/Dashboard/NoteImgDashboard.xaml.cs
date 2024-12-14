@@ -1,6 +1,9 @@
 using NoteApp.Models.common;
 using NoteApp.Models.Dashboard;
+using NoteApp.Models.PhotoPage;
 using NoteApp.Services.PhotoPage;
+using NoteApp.Services.PhotoPage;
+using NoteApp.Utils;
 using System.Collections.ObjectModel;
 
 namespace NoteApp.Views.components.Dashboard;
@@ -9,6 +12,7 @@ public partial class NoteImgDashboard : ContentView
 {
 	public ObjectDashBoard element;
 	private PhotoPageDelete service;
+    private PhotoPageService _service;
 	private ObservableCollection<ObjectDashBoard> _list;
     public NoteImgDashboard(ObjectDashBoard e, ObservableCollection<ObjectDashBoard> items)
 	{
@@ -40,5 +44,7 @@ public partial class NoteImgDashboard : ContentView
 		else { 
 			await Application.Current.MainPage.DisplayAlert("Eliminacíón de Nota", "Error al eliminar nota", "Aceptar");
         }
+    }
+    public async void OnShareRegister(object sender, EventArgs args) {
     }
 }

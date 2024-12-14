@@ -18,6 +18,7 @@
                     <SwipeItem 
                                  BackgroundColor="#2C2C2C" 
                                  IconImageSource="share.png"
+                                 Clicked="OnShareRegister"
                                  />
                 </SwipeItems>
             </SwipeView.RightItems>
